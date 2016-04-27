@@ -5,28 +5,61 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module("provedoresApp", ["ngRoute"])
-.config(function ($routeProvider, $locationProvider) {
+var app = angular.module("app", ['ui.router'])
+    .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+        $stateProvider
+            .state('login', {
+                url: "/",
+                templateUrl: 'angularJS/templates/login.html',
+                controller: 'loginController'
+            })
+            .state('signup', {
+                url: "/registro",
+                templateUrl: 'angularJS/templates/signup.html',
+                controller: 'signupController'
+            })
+            .state('admin', {
+                abstrac:true,
+                templateUrl: 'angularJS/templates/admin.html'
+            })
+            .state('admin.content', {
+                url: "/admin",
+                views: {
+                    news: {
+                        templateUrl: "angularJS/templates/news.html"
+                    },
+                    pOrder: {
+                        templateUrl: "angularJS/templates/pOrder.html"
+                    },
+                    iPortal: {
+                        templateUrl: "angularJS/templates/iPortal.html"
+                    },
+                    oPaid: {
+                        templateUrl: "angularJS/templates/oPaid.html"
+                    },
+                    account: {
+                        templateUrl: "angularJS/templates/account.html"
+                    }
 
-    /*cheange the routes*/
-    $routeProvider.when('/', {
-        templateUrl: 'angularJS/templates/example.html',//example 1
-        controller: 'loginController'
+                }
+            })
+
+        $urlRouterProvider.otherwise("/");
     });
 
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
-});
-
-app.directive('resize', function ($window) {
-	return function (scope, element) {
-		var w = angular.element($window);
-        var changeHeight = function() {element.css('height', (w.height() -20) + 'px' );};
-			w.bind('resize', function () {
-		      changeHeight();   // when window size gets changed
-		});
+app.directive('resize', function($window) {
+    return function(scope, element) {
+        var w = angular.element($window);
+        var changeHeight = function() {
+            element.css('height', (w.height() - 20) + 'px');
+        };
+        w.bind('resize', function() {
+            changeHeight(); // when window size gets changed
+        });
         changeHeight(); // when page loads
-	}
+    }
 });

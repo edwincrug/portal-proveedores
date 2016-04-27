@@ -1,0 +1,24 @@
+<div class="st-container">
+    <input type="radio" name="radio-set" checked="checked" id="st-control-1" />
+    <a href="#st-panel-1">Noticias</a>
+    <input type="radio" name="radio-set" id="st-control-2" />
+    <a href="#st-panel-2">Ordenes pendientes</a>
+    <input type="radio" name="radio-set" id="st-control-3" />
+    <a href="#st-panel-3">Ingresadas al portal</a>
+    <input type="radio" name="radio-set" id="st-control-4" />
+    <a href="#st-panel-4">Ordenes pagadas</a>
+    <input type="radio" name="radio-set" id="st-control-5" />
+    <a href="#st-panel-5">Mi cuenta</a>
+
+    <div class="st-deco-img"><img src="images/logo.png" alt="" /></div>
+
+    <div class="st-scroll">
+        <section class="st-panel" id="st-panel-1" ui-view="news"></section>
+        <section class="st-panel st-color" id="st-panel-2" ui-view="pOrder"></section>
+        <section class="st-panel" id="st-panel-3" ui-view="iPortal"></section>
+        <section class="st-panel st-color" id="st-panel-4" ui-view="oPaid"></section>
+        <section class="st-panel" id="st-panel-5"  ui-view="account"></section>
+    </div>
+    <!-- // st-scroll -->
+
+</div>
