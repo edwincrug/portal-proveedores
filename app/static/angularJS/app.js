@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module("app", ['ui.router'])
+var app = angular.module('app', ['ui.router'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -13,12 +13,12 @@ var app = angular.module("app", ['ui.router'])
         });
         $stateProvider
             .state('login', {
-                url: "/",
+                url: '/',
                 templateUrl: 'angularJS/templates/login.html',
                 controller: 'loginController'
             })
             .state('signup', {
-                url: "/registro",
+                url: '/registro',
                 templateUrl: 'angularJS/templates/signup.html',
                 controller: 'signupController'
             })
@@ -27,28 +27,29 @@ var app = angular.module("app", ['ui.router'])
                 templateUrl: 'angularJS/templates/admin.html'
             })
             .state('admin.content', {
-                url: "/admin",
+                url: '/ordenes',
                 views: {
                     news: {
-                        templateUrl: "angularJS/templates/news.html"
+                        templateUrl: 'angularJS/templates/news.html'
                     },
                     pOrder: {
-                        templateUrl: "angularJS/templates/pOrder.html"
+                        templateUrl: 'angularJS/templates/pOrder.html',
+                        controller: 'pOrderController'
                     },
                     iPortal: {
-                        templateUrl: "angularJS/templates/iPortal.html"
+                        templateUrl: 'angularJS/templates/iPortal.html'
                     },
                     oPaid: {
-                        templateUrl: "angularJS/templates/oPaid.html"
+                        templateUrl: 'angularJS/templates/oPaid.html'
                     },
                     account: {
-                        templateUrl: "angularJS/templates/account.html"
+                        templateUrl: 'angularJS/templates/account.html'
                     }
 
                 }
             })
 
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise('/');
     });
 
 app.directive('resize', function($window) {
