@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module('app', ['ui.router'])
+var app = angular.module('app', ['ui.router','angularFileUpload'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -44,6 +44,10 @@ var app = angular.module('app', ['ui.router'])
                     },
                     account: {
                         templateUrl: 'angularJS/templates/account.html'
+                    },
+                    fileUpload: {
+                        templateUrl: 'angularJS/templates/fileUpload.html',
+                        controller: 'fileUploadController'
                     }
 
                 }

@@ -1,0 +1,61 @@
+<div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="fileModalLabel">Subir factura</h2>
+            </div>
+            <div class="modal-body">
+                <div class="fileUpload btn btn-block btn-primary andrade-color">
+                    <span>Selecciona XML</span>
+                    <input type="file" class="upload" nv-file-select uploader="xmlUploader" />
+                </div>
+                <div class="fileUpload btn btn-block btn-primary andrade-color">
+                    <span>Selecciona PDF</span>
+                    <input type="file" class="upload" nv-file-select uploader="pdfUploader" />
+                </div>
+                <div ng-show="xmlUploader.queue.length>0" class="row">
+                    <div class="col-xs-12">
+                        <strong>XML</strong>
+                    </div>
+                </div>
+                <div style="line-height: 36px;" ng-repeat="item in xmlUploader.queue" class="row">
+                    <div class="hidden-xs col-sm-2  ">
+                        <b>Archivo:</b>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        {{item.file.name}}
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                        <button class="btn btn-success btn-block" ng-click="item.upload()">Subir</button>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <button class="btn btn-danger btn-block" ng-click="item.remove()">Cancelar</button>
+                    </div>
+                </div>
+                <br ng-show="xmlUploader.queue.length>0">
+                <div ng-show="pdfUploader.queue.length>0" class="row">
+                    <div class="col-xs-12">
+                        <strong>PDF</strong>
+                    </div>
+                </div>
+                <div style="line-height: 36px;" ng-repeat="item in pdfUploader.queue" class="row">
+                    <div class="hidden-xs col-sm-2  ">
+                        <b>Archivo:</b>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        {{item.file.name}}
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                        <button class="btn btn-success btn-block" ng-click="item.upload()">Subir</button>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <button class="btn btn-danger btn-block" ng-click="item.remove()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

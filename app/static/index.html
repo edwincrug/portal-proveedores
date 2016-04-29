@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Libreria de Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900italic' rel='stylesheet' type='text/css'>
-
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900italic' rel='stylesheet' type='text/css'|link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900italic' rel='stylesheet' type='text/css'>
     <!--Hojas de estilos-->
     <link href="css/libs/bootstrap.css" rel="stylesheet" />
 
@@ -31,12 +30,14 @@
 <body ng-app="app">
     <div ui-view></div>
 
+
     <!--Interface de usuario-->
     <script src="js/libs/toastr/toastr.min.js"></script>
 
     <!-- Librerias Angular-->
     <script src="js/libs/angular/angular.min.js"></script>
     <script src="js/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="js/libs/angular-file-upload/dist/angular-file-upload.min.js"></script>
     <!--script src="js/libs/angular/angular-route.min.js"></script-->
     <!--<script src="js/libs/angular/angular-animate.min.js"></script>-->
     <!--<script src="js/libs/angular/ui-bootstrap-tpls.min.js"></script>-->
@@ -62,11 +63,13 @@
     <script src="angularJS/modules/companyFactory.js"></script>
     <script src="angularJS/modules/branchFactory.js"></script>
     <script src="angularJS/modules/orderFactory.js"></script>
+    <script src="angularJS/modules/filters.js"></script>
+
     <!--Controllers-->
     <script src="angularJS/pages/login/loginController.js"></script>
     <script src="angularJS/pages/signup/signupController.js"></script>
     <script src="angularJS/pages/admin/pOrderController.js"></script>
-
+    <script src="angularJS/pages/admin/fileUploadController.js"></script>
 </body>
 
 </html>
