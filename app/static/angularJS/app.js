@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module('app', ['ui.router','angularFileUpload'])
+var app = angular.module('app', ['ui.router', 'angularFileUpload'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -23,11 +23,12 @@ var app = angular.module('app', ['ui.router','angularFileUpload'])
                 controller: 'signupController'
             })
             .state('admin', {
-                abstrac:true,
+                abstrac: true,
                 templateUrl: 'angularJS/templates/admin.html'
             })
             .state('admin.content', {
                 url: '/ordenes',
+                admin: true,
                 views: {
                     news: {
                         templateUrl: 'angularJS/templates/news.html'
@@ -37,10 +38,12 @@ var app = angular.module('app', ['ui.router','angularFileUpload'])
                         controller: 'pOrderController'
                     },
                     iPortal: {
-                        templateUrl: 'angularJS/templates/iPortal.html'
+                        templateUrl: 'angularJS/templates/iPortal.html',
+                        controller: 'iPortalController'
                     },
                     oPaid: {
-                        templateUrl: 'angularJS/templates/oPaid.html'
+                        templateUrl: 'angularJS/templates/oPaid.html',
+                        controller: 'oPaidController'
                     },
                     account: {
                         templateUrl: 'angularJS/templates/account.html'

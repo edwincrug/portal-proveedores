@@ -1,4 +1,4 @@
-app.controller('pOrderController', function($scope, $filter, Company, Branch, Order, File) {
+app.controller('oPaidController', function($scope, $filter, Company, Branch, Order, File) {
     // Temporal
     var idProvider = 4;
     $scope.companyList = [];
@@ -9,7 +9,7 @@ app.controller('pOrderController', function($scope, $filter, Company, Branch, Or
     $scope.branchSelectVisible = false;
     var totalElements;
 
-    Order.getPendingByProvider(idProvider)
+    Order.getPaidByProvider(idProvider)
         .then(function(res) {
             $scope.orderList = res.data;
             totalElements = $scope.orderList.length;
@@ -45,9 +45,6 @@ app.controller('pOrderController', function($scope, $filter, Company, Branch, Or
         filterApply();
     }
 
-    $scope.uploadinvoice = function(order) {
-        File.order = order;
-    }
 
     function filterApply() {
         totalElements = $filter('order')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;

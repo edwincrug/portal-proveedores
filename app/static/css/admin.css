@@ -400,6 +400,14 @@ th {
 .andrade-color{
     background-color: #000084;
 }
+.andrade-button{
+  color:white;
+    background-color: #000084;
+}
+.andrade-button:hover, .andrade-button:focus,.andrade-button:active,.andrade-button:active:hover{
+    color:white;
+    background-color: #0000B4;
+}
 .admin-content label {
     color: #000084;
 }
@@ -409,6 +417,12 @@ th {
 .pagination > li > a{
   color: #000084;
 }
+.login-form{
+background-color: white;
+border-radius: 16px;
+padding: 20px 12px 4px 12px;
+}
+
 @media screen and (max-width: 360px) {
     .st-container > a {
         height: 30px;

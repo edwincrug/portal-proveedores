@@ -1,4 +1,4 @@
-app.controller('pOrderController', function($scope, $filter, Company, Branch, Order, File) {
+app.controller('iPortalController', function($scope, $filter, Company, Branch, Order, File) {
     // Temporal
     var idProvider = 4;
     $scope.companyList = [];
@@ -9,7 +9,7 @@ app.controller('pOrderController', function($scope, $filter, Company, Branch, Or
     $scope.branchSelectVisible = false;
     var totalElements;
 
-    Order.getPendingByProvider(idProvider)
+    Order.getEnterByProvider(idProvider)
         .then(function(res) {
             $scope.orderList = res.data;
             totalElements = $scope.orderList.length;

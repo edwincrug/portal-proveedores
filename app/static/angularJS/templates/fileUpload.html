@@ -8,31 +8,51 @@
             <div class="modal-body">
                 <div class="fileUpload btn btn-block btn-primary andrade-color">
                     <span>Selecciona XML</span>
-                    <input type="file" class="upload" nv-file-select uploader="xmlUploader" />
+                    <input type="file" accept=".xml" class="upload" nv-file-select uploader="xmlUploader" />
                 </div>
                 <div class="fileUpload btn btn-block btn-primary andrade-color">
                     <span>Selecciona PDF</span>
-                    <input type="file" class="upload" nv-file-select uploader="pdfUploader" />
+                    <input type="file"  accept=".pdf" class="upload" nv-file-select uploader="pdfUploader" />
                 </div>
                 <div ng-show="xmlUploader.queue.length>0" class="row">
                     <div class="col-xs-12">
                         <strong>XML</strong>
                     </div>
                 </div>
-                <div style="line-height: 36px;" ng-repeat="item in xmlUploader.queue" class="row">
+                <div ng-repeat="item in xmlUploader.queue" class="row">
                     <div class="hidden-xs col-sm-2  ">
                         <b>Archivo:</b>
                     </div>
                     <div class="col-xs-12 col-sm-4">
-                        {{item.file.name}}
+                        <span>{{item.file.name}}</span>
                     </div>
-
-                    <div class="col-xs-6 col-sm-3">
+                    <!--isReady-->
+                    <div ng-show="!item.isUploading && !item.isSuccess && !item.isError" class="col-xs-6 col-sm-3">
                         <button class="btn btn-success btn-block" ng-click="item.upload()">Subir</button>
                     </div>
-                    <div class="col-xs-6 col-sm-3">
+                    <div ng-show="!item.isUploading && !item.isSuccess && !item.isError" class="col-xs-6 col-sm-3">
                         <button class="btn btn-danger btn-block" ng-click="item.remove()">Cancelar</button>
                     </div>
+                    <!--isUploading-->
+                    <div ng-show="item.isUploading" class="col-xs-12 col-sm-6">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.progress}}%">
+                                <span class="sr-only">{{item.progress}}% Completo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--isSuccess-->
+                    <div ng-show="item.isSuccess" class="col-xs-6 col-sm-3">
+                        <span>El archivo XML se guardo correctamente.</span>
+                    </div>
+                    <div ng-show="item.isSuccess" class="col-xs-6 col-sm-3">
+                          <button class="btn btn-danger btn-block" ng-click="item.remove()">Borrar</button>
+                    </div>
+                    <!--isError-->
+                    <div ng-show="item.isError" class="col-xs-12 col-sm-6">
+                        <span>El archivo XML no se cargo, intenta de nuevo.</span>
+                    </div>
+
                 </div>
                 <br ng-show="xmlUploader.queue.length>0">
                 <div ng-show="pdfUploader.queue.length>0" class="row">
@@ -40,7 +60,7 @@
                         <strong>PDF</strong>
                     </div>
                 </div>
-                <div style="line-height: 36px;" ng-repeat="item in pdfUploader.queue" class="row">
+                <div ng-repeat="item in pdfUploader.queue" class="row">
                     <div class="hidden-xs col-sm-2  ">
                         <b>Archivo:</b>
                     </div>
@@ -48,12 +68,33 @@
                         {{item.file.name}}
                     </div>
 
-                    <div class="col-xs-6 col-sm-3">
+                    <!--isReady-->
+                    <div ng-show="!item.isUploading && !item.isSuccess && !item.isError" class="col-xs-6 col-sm-3">
                         <button class="btn btn-success btn-block" ng-click="item.upload()">Subir</button>
                     </div>
-                    <div class="col-xs-6 col-sm-3">
+                    <div ng-show="!item.isUploading && !item.isSuccess && !item.isError" class="col-xs-6 col-sm-3">
                         <button class="btn btn-danger btn-block" ng-click="item.remove()">Cancelar</button>
                     </div>
+                    <!--isUploading-->
+                    <div ng-show="item.isUploading" class="col-xs-12 col-sm-6">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.progress}}%">
+                                <span class="sr-only">{{item.progress}}% Completo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--isSuccess-->
+                    <div ng-show="item.isSuccess" class="col-xs-6 col-sm-3">
+                        <span>El archivo PDF se guardo correctamente.</span>
+                    </div>
+                    <div ng-show="item.isSuccess" class="col-xs-6 col-sm-3">
+                          <button class="btn btn-danger btn-block" ng-click="item.remove()">Borrar</button>
+                    </div>
+                    <!--isError-->
+                    <div ng-show="item.isError" class="col-xs-12 col-sm-6">
+                        <span>El archivo PDF no se cargo, intenta de nuevo.</span>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -34,13 +34,14 @@ var ExpressServer = function(config) {
     }
 
     for (var controller in router) {
+        var middles = new router[controller]().middlewares || [];
         for (var funcionalidad in router[controller].prototype) {
             var method = funcionalidad.split('_')[0];
             var entorno = funcionalidad.split('_')[1];
             var data = funcionalidad.split('_')[2];
             data = (method == 'get' && data !== undefined) ? ':data' : '';
             var url = '/api/' + controller + '/' + entorno + '/' + data;
-            this.router(controller, funcionalidad, method, url);
+            this.router(controller, funcionalidad, method, url,middles);
         }
     }
     //Servimos el archivo angular
@@ -49,10 +50,10 @@ var ExpressServer = function(config) {
     });
 };
 
-ExpressServer.prototype.router = function(controller, funcionalidad, method, url) {
+ExpressServer.prototype.router = function(controller, funcionalidad, method, url,middles) {
     console.log(url);
     var parameters = this.config.parameters;
-    this.expressServer[method](url, function(req, res, next) {
+    this.expressServer[method](url,middles, function(req, res, next) {
         var conf = {
             'funcionalidad': funcionalidad,
             'req': req,

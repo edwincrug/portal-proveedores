@@ -1,18 +1,11 @@
-// -- =============================================
-// -- Author:      Vladimir Juárez
-// -- Create date: 18/03/2016
-// -- Description: example controller
-// -- Modificó:
-// -- Fecha:
-// -- =============================================
-app.controller('loginController', function($scope, alertFactory){
-	//this is the first method executed in the view
-	$scope.init = function(){
-		$scope.hello = "Hello, Angular is ready! XD  :)  :(";
-	}
-
-	//all the logic for the view
-	$scope.sayHello = function(){
-		alertFactory.success($scope.hello);
-	}
+app.controller('loginController', function($scope, $state, alertFactory, User) {
+    $scope.rfc = ""
+    $scope.pass = ""
+    $scope.submit = function() {
+        User.login($scope.rfc, $scope.pass).success(function(data, status, headers, config) {
+            if (data.length > 0) {
+                $state.go("admin.content");
+            }
+        })
+    }
 });

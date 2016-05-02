@@ -1,1 +1,30 @@
-<h1>Login</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="login-form col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+        <div class="login-form">
+            <div class="text-center">
+                <img src="http://192.168.20.9/GA_Centralizacion/CuentasXPagar/Imagenes/Logos/LogoAndrade.jpg" alt="" />
+            </div>
+            <br><br>
+            <form ng-submit="submit()">
+                <div class="form-group">
+                    <label for="rfc">RFC</label>
+                    <input ng-model="rfc" type="text" class="form-control" id="rfc" >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input ng-model="pass" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <input  type="submit" class="btn btn-default btn-block andrade-button" value="Entrar">
+                <p class="text-center">
+                    ¿No tiene una cuenta?
+                    <a href="registro">Crear cuenta</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
