@@ -1,6 +1,5 @@
-app.controller('oPaidController', function($scope, $filter, Company, Branch, Order, File) {
-    // Temporal
-    var idProvider = 4;
+app.controller('oPaidController', function($scope, $stateParams, $filter, Company, Branch, Order, File) {
+    var idProvider = $stateParams.data.per_idpersona;
     $scope.companyList = [];
     $scope.branchList = [];
     $scope.orderList = [];

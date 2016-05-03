@@ -1,4 +1,7 @@
 var request = require('request');
+var passport = require('passport');
+var Auth = require('../modules/auth');
+
 
 var User = function(conf) {
     this.url = "http://192.168.20.9/ProveedorApi/api/loginapi/"
@@ -9,14 +12,39 @@ var User = function(conf) {
 }
 
 User.prototype.post_entrar = function(req, res, next) {
-  
+    var self = this;
     if (req.body.rfc && req.body.pass) {
         request.get(this.url + "1|" + req.body.rfc + "|" + req.body.pass, function(error, response, body) {
             if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
+                body = JSON.parse(body);
+                if (!body.length > 0) return res.status(401).send("No autorizado");
+                auth = new Auth(self.conf);
+                auth.saveUser(body[0], function(err, token) {
+                    if (err) return err;
+                    res.json({
+                        token: token
+                    });
+                })
             }
         })
     }
 }
+
+User.prototype.get_me = function(req, res, next) {
+    var self = this;
+    passport.authenticate('bearer', function(err, user, info) {
+        if (err) {
+          console.log("Error")
+            return next(err);
+        }
+        if (!user) {
+            return res.status(401).send("No autorizado");
+        }
+        delete user.token
+        res.json(user);
+    })(req, res, next);
+}
+
+
 
 module.exports = User;

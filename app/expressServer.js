@@ -4,10 +4,12 @@ var env = process.env.NODE_ENV || 'production',
     middlewares = require('./middlewares/admin'),
     router = require('./website/router');
 
+
 //Alta de opciones
 var done = false;
 
 var ExpressServer = function(config) {
+    new require('./website/modules/auth')(config)
     this.config = config || {};
     this.expressServer = express();
 

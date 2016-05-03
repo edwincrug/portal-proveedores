@@ -1,6 +1,5 @@
-app.controller('pOrderController', function($scope, $filter, Company, Branch, Order, File) {
-    // Temporal
-    var idProvider = 4;
+app.controller('pOrderController', function($scope, $stateParams, $filter, Company, Branch, Order, File) {
+    var idProvider = $stateParams.data.per_idpersona;
     $scope.companyList = [];
     $scope.branchList = [];
     $scope.orderList = [];
@@ -46,7 +45,7 @@ app.controller('pOrderController', function($scope, $filter, Company, Branch, Or
     }
 
     $scope.uploadinvoice = function(order) {
-        File.order = order;
+        File.order = {provider:idProvider,rfc:order.per_rfc,folio:order.oce_folioorden};
     }
 
     function filterApply() {

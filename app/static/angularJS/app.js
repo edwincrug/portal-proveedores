@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module('app', ['ui.router', 'angularFileUpload'])
+var app = angular.module('app', ['ui.router', 'angularFileUpload','httpHelper','ngCookies'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -29,6 +29,7 @@ var app = angular.module('app', ['ui.router', 'angularFileUpload'])
             .state('admin.content', {
                 url: '/ordenes',
                 admin: true,
+                params: { data: ""},
                 views: {
                     news: {
                         templateUrl: 'angularJS/templates/news.html'
