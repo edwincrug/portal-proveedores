@@ -8,18 +8,13 @@
 }
 
 /* General Demo Style */
-button,
-input,
-select,
-textarea {
-  font-family: "Source Sans Pro"!important;
 
+button, input, select, textarea {
+    font-family: "Source Sans Pro"!important;
 }
-
 body {
     background: #ddd;
     font-weight: 400;
-    font-size: 15px;
     color: #333;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
@@ -327,7 +322,6 @@ a {
     margin: 5em;
     background-color: #CCC;
 }
-
 .fileUpload {
     position: relative;
     overflow: hidden;
@@ -343,7 +337,14 @@ a {
     opacity: 0;
     filter: alpha(opacity=0);
 }
-
+.scroll-page {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
 @media screen and (max-width: 768px) {
     .st-container > a {
         height: 35px;
@@ -386,43 +387,42 @@ th {
     right: 0px;
     left: 0px;
 }
-.admin-pagination{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -24px;
-  text-align: center;
+.admin-pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -24px;
+    text-align: center;
 }
-.admin-table table{
-  margin: 0px;
+.admin-table table {
+    margin: 0px;
 }
-
-.andrade-color{
+.andrade-color {
     background-color: #000084;
 }
-.andrade-button{
-  color:white;
+.andrade-button {
+    color: white;
     background-color: #000084;
 }
-.andrade-button:hover, .andrade-button:focus,.andrade-button:active,.andrade-button:active:hover{
-    color:white;
+.andrade-button:hover, .andrade-button:focus, .andrade-button:active, .andrade-button:active:hover {
+    color: white;
     background-color: #0000B4;
 }
 .admin-content label {
     color: #000084;
 }
-.pagination > .active > a{
+.pagination > .active > a {
     background-color: #000084;
 }
-.pagination > li > a{
-  color: #000084;
+.pagination > li > a {
+    color: #000084;
 }
-.login-form{
-background-color: white;
-border-radius: 16px;
-padding: 20px 12px 4px 12px;
+.login-form {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px 12px 4px 12px;
+    margin: 16px 0;
 }
-
 @media screen and (max-width: 360px) {
     .st-container > a {
         height: 30px;

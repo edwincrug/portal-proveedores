@@ -7,6 +7,14 @@ app.factory("User", function($http,$cookies) {
                 pass: pass
             });
         },
+        signup: function(razon,email,rfc, pass) {
+            return $http.post(url + 'registrar/', {
+                razon:razon,
+                email:email,
+                rfc: rfc,
+                pass: pass
+            });
+        },
         me: function() {
           return $http.get(url + 'me/');
         },

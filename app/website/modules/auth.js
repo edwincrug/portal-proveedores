@@ -8,7 +8,7 @@ var Auth = function(config) {
     passport.use(new Strategy(
         function(token, cb) {
             new Auth(config).verifyUser(token, function(exists) {
-                if (!exists) return cb(null,false);
+                if (!exists) return cb(null, false);
                 jwt.verify(token, self.config.secret, function(err, decoded) {
                     if (err) return cb(err)
                     return cb(null, decoded);
