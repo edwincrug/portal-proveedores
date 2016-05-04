@@ -4,8 +4,10 @@ var Auth = require('../modules/auth');
 
 
 var User = function(conf) {
-    this.url = "http://192.168.20.9/ProveedorApi/api/loginapi/"
     this.conf = conf || {};
+    if (conf) {
+        this.url = this.conf.parameters.server + "loginapi/"
+    }
     this.response = function() {
         this[this.conf.funcionalidad](this.conf.req, this.conf.res, this.conf.next);
     }
@@ -38,19 +40,19 @@ User.prototype.post_registrar = function(req, res, next) {
             },
             function(error, response, body) {
                 console.log(body)
-                if(error)res.send(error)
+                if (error) res.send(error)
                 if (!error && response.statusCode == 200) {
-                  res.send("ok")
-                    /*  body = JSON.parse(body);
-                      if (!body.length > 0) return res.status(401).send("No autorizado");
-                      auth = new Auth(self.conf);
-                      auth.saveUser(body[0], function(err, token) {
-                          if (err) return err;
-                          res.json({
-                              token: token
-                          });
-                      })
-                      */
+                    res.send("ok")
+                        /*  body = JSON.parse(body);
+                          if (!body.length > 0) return res.status(401).send("No autorizado");
+                          auth = new Auth(self.conf);
+                          auth.saveUser(body[0], function(err, token) {
+                              if (err) return err;
+                              res.json({
+                                  token: token
+                              });
+                          })
+                          */
                 }
             })
     }

@@ -15,8 +15,10 @@ var upload = multer({ storage: storage });
 
 
 var FileUpload = function(conf) {
-    this.url = "http://192.168.20.9/ProveedorApi/api/cargaapi/"
     this.conf = conf || {};
+    if (conf) {
+        this.url = this.conf.parameters.server + "cargaapi/"
+    }
     this.response = function() {
         this[this.conf.funcionalidad](this.conf.req, this.conf.res, this.conf.next);
     }
