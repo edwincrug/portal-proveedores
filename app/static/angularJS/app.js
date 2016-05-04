@@ -47,7 +47,8 @@ var app = angular.module('app', ['ui.router', 'angularFileUpload','httpHelper','
                         controller: 'oPaidController'
                     },
                     account: {
-                        templateUrl: 'angularJS/templates/account.html'
+                        templateUrl: 'angularJS/templates/account.html',
+                        controller: 'userController'
                     },
                     fileUpload: {
                         templateUrl: 'angularJS/templates/fileUpload.html',

@@ -15,6 +15,9 @@ app.factory("User", function($http,$cookies) {
                 pass: pass
             });
         },
+        logout:function(){
+          return $http.post(url + 'salir/');
+        },
         me: function() {
           return $http.get(url + 'me/');
         },

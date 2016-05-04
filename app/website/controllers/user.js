@@ -32,6 +32,17 @@ User.prototype.post_entrar = function(req, res, next) {
     }
 }
 
+User.prototype.post_salir = function(req, res, next) {
+    var self = this;
+      auth = new Auth(self.conf);
+    auth.getUser(req, res, next, function(user) {
+        auth.removeUser(user,function(err,data){
+          if(err) return res.json({response:"error"})
+          res.json({response:"ok"})
+        })
+    })
+}
+
 User.prototype.post_registrar = function(req, res, next) {
     var self = this;
     if (req.body.razon && req.body.email && req.body.rfc && req.body.pass) {
@@ -60,18 +71,12 @@ User.prototype.post_registrar = function(req, res, next) {
 
 User.prototype.get_me = function(req, res, next) {
     var self = this;
-    passport.authenticate('bearer', function(err, user, info) {
-        if (err) {
-            console.log("Error")
-            return next(err);
-        }
-        if (!user) {
-            return res.status(401).send("No autorizado");
-        }
-
-        delete user.token
+      auth = new Auth(self.conf);
+    auth.getUser(req, res, next, function(user) {
+        delete user.token;
         res.json(user);
-    })(req, res, next);
+    })
+
 }
 
 

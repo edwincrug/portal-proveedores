@@ -11,6 +11,7 @@ var Auth = function(config) {
                 if (!exists) return cb(null, false);
                 jwt.verify(token, self.config.secret, function(err, decoded) {
                     if (err) return cb(err)
+                    decoded.token = token
                     return cb(null, decoded);
                 })
             });
@@ -27,6 +28,29 @@ Auth.prototype.saveUser = function(user, cb) {
         Auth.users.push(user);
         return cb(null, token)
     });
+}
+
+Auth.prototype.removeUser = function(user,cb) {
+    var self = this;
+    Auth.users.forEach(function(u,n){
+        if(u.token === user.token){
+          Auth.users.splice(n,1)
+          return cb(null,true)
+        }
+        cb(true)
+    })
+}
+
+Auth.prototype.getUser = function(req, res, next, cb) {
+    passport.authenticate('bearer', function(err, user, info) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.status(401).send("No autorizado");
+        }
+        cb(user)
+    })(req, res, next);
 }
 
 Auth.prototype.verifyUser = function(token, cb) {
