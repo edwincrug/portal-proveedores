@@ -1,25 +1,28 @@
-app.controller('pOrderController', function($scope, $stateParams, $filter, Company, Branch, Order, File) {
-    var idProvider = $stateParams.data.per_idpersona;
+app.controller('pOrderController', function($scope, $stateParams, $filter, User, Company, Branch, Order, File) {
     $scope.companyList = [];
     $scope.branchList = [];
     $scope.orderList = [];
-    $scope.itemsPerPage = 10;
+    $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
     $scope.branchSelectVisible = false;
+    $scope.visible = false;
     var totalElements;
+    User.me().then(function(data) {
+        $scope.idProvider = data.data.ppro_userId
+        Order.getPendingByProvider($scope.idProvider)
+            .then(function(res) {
+                $scope.orderList = res.data;
+                totalElements = $scope.orderList.length;
+                $scope.visible = true;
+            })
 
-    Order.getPendingByProvider(idProvider)
-        .then(function(res) {
-            $scope.orderList = res.data;
-            totalElements = $scope.orderList.length;
-        })
+        Company.getByProvider($scope.idProvider)
+            .then(function(res) {
+                $scope.companyList = res.data;
+                $scope.company = $scope.companyList[0];
+            });
 
-    Company.getByProvider(idProvider)
-        .then(function(res) {
-            $scope.companyList = res.data;
-            $scope.company = $scope.companyList[0];
-        });
-
+    })
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {
             $scope.branchSelectVisible = true;
@@ -45,8 +48,14 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, Compa
     }
 
     $scope.uploadinvoice = function(order) {
-        File.order = {provider:idProvider,rfc:order.per_rfc,folio:order.oce_folioorden};
+        File.order = {
+            provider: $scope.idProvider,
+            rfc: order.per_rfc,
+            folio: order.oce_folioorden
+        };
     }
+
+
 
     function filterApply() {
         totalElements = $filter('order')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;
@@ -100,4 +109,5 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, Compa
     $scope.setPage = function(n) {
         $scope.currentPage = n;
     };
+
 });

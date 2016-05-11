@@ -1,44 +1,40 @@
-<div class="scroll-page row">
-    <div class="login-form col-xs-10 col-xs-push-1 col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
-        <div class="login-form">
-            <div class="text-center">
-                <img src="http://192.168.20.9/GA_Centralizacion/CuentasXPagar/Imagenes/Logos/LogoAndrade.jpg" alt="" />
+<div class="gray-bg" style="min-height:100%;">
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+                <h1 >
+                    <img width="250" src="images/logoA.png" alt=""/>
+                </h1>
             </div>
-            <br>
-            <form ng-submit="submit()">
+            <h3>Registrate para obtener una cuenta</h3>
+            <form class="m-t" role="form" ng-submit="submit()">
                 <div class="form-group">
-                    <label for="razon">Razon social</label>
-                    <input required ng-model="razon" type="text" class="form-control" id="razon">
-                </div>
-                <div class="form-group">
-                    <label for="rfc">RFC</label>
-                    <input required ng-model="rfc" type="text" class="form-control" id="rfc">
+                    <input required ng-model="razon" type="text" class="form-control" placeholder="Razon social">
                 </div>
                 <div class="form-group">
-                    <label for="email">Correo electronico</label>
-                    <input required ng-model="email" type="email" class="form-control" id="email">
+                    <input required ng-model="rfc" type="text" class="form-control" placeholder="RFC">
                 </div>
                 <div class="form-group">
-                    <label for="pass">Contraseña</label>
-                    <input minlength="6" required ng-model="pass" type="password" class="form-control" id="pass">
+                    <input required ng-model="email" type="email" class="form-control" placeholder="Correo electronico">
                 </div>
                 <div class="form-group">
-                    <label for="passConfirm">Repite contraseña</label>
-                    <input minlength="6" required ng-model="passConfirm" type="password" class="form-control" id="passConfirm">
+                    <input minlength="6" required ng-model="pass" type="password" class="form-control" placeholder="Contraseña" id="pass">
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input required type="checkbox" value="">
-                        Acepto el <a href="#">aviso de privacidad</a>
-                    </label>
+                <div class="form-group">
+                    <input minlength="6" required ng-model="passConfirm" type="password" class="form-control" placeholder="Confirma contraseña" id="passConfirm">
                 </div>
-                <input type="submit" class="btn btn-default btn-block andrade-button" value="Crear cuenta">
-                <p class="text-center">
-                    ¿Ya tiene cuenta?
-                    <a href="/">Ingresar</a>
-                </p>
+                <div class="form-group">
+                    <div class="checkbox i-checks">
+                      <label>
+                            <input required type="checkbox"><i></i> Acepto los términos </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Crear cuenta</button>
+                <p class="text-muted text-center"><small>Ya tengo cuenta</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="/">Iniciar sesion</a>
             </form>
+            <br>
+            <br>
         </div>
     </div>
-
 </div>

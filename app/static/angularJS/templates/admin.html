@@ -1,24 +1,85 @@
-<div class="st-container">
-    <input type="radio" name="radio-set" checked="checked" id="st-control-1" />
-    <a href="#st-panel-1">Noticias</a>
-    <input type="radio" name="radio-set" id="st-control-2" />
-    <a href="#st-panel-2">Ordenes pendientes</a>
-    <input type="radio" name="radio-set" id="st-control-3" />
-    <a href="#st-panel-3">Ingresadas al portal</a>
-    <input type="radio" name="radio-set" id="st-control-4" />
-    <a href="#st-panel-4">Ordenes pagadas</a>
-    <input type="radio" name="radio-set" id="st-control-5" />
-    <a href="#st-panel-5">Mi cuenta</a>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                        <!--img alt="image" class="img-circle" src="img/profile_small.jpg" /-->
+                         </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{razonSocial}}</strong>
+                         </span> <span class="text-muted text-xs block">{{rfc}} <b class="caret"></b></span> </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="cuenta">Cuenta</a></li>
+                            <li class="divider"></li>
+                            <li><a href="login.html">Salir</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        GA
+                    </div>
+                </li>
+                <li>
+                    <a href="noticias"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Noticias</span></a>
+                </li>
+                <li>
+                    <a href="ordenes-pendientes"><i class="fa fa-file-o"></i> <span class="nav-label">Ordenes</span></a>
+                </li>
+                <li>
+                    <a href="ordenes-pendientes"><i class="fa fa-user"></i> <span class="nav-label">Cuenta</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <h3 class="m-r-lg text-muted welcome-message">Portal provedores</h3>
+                    </li>
 
-    <div class="st-deco-img"><img src="images/logo.png" alt="" /></div>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-newspaper-o"></i> <span class="label label-warning">{{alertNews.textoAlerta}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="noticias">
+                                    <div>
+                                        <i class="fa fa-newspaper-o"></i> Tienes {{alertNews.textoAlerta}} noticias sin leer
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-file-o"></i> <span class="label label-primary">{{alertNewOrder.textoAlerta}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="ordenes-pendientes">
+                                    <div>
+                                        <i class="fa fa-file-o"></i> Tienes {{alertNewOrder.textoAlerta}} ordenes de compra sin leer
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-sign-out"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div ui-view></div>
+          </div>
 
-    <div class="st-scroll">
-        <section class="st-panel" id="st-panel-1" ui-view="news"></section>
-        <section class="st-panel st-color" id="st-panel-2" ui-view="pOrder"></section>
-        <section class="st-panel" id="st-panel-3" ui-view="iPortal"></section>
-        <section class="st-panel st-color" id="st-panel-4" ui-view="oPaid"></section>
-        <section class="st-panel" id="st-panel-5"  ui-view="account"></section>
-    </div>
-    <!-- // st-scroll -->
 </div>
-<div ui-view="fileUpload"></div>

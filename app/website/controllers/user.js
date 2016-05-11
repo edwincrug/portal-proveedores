@@ -27,8 +27,12 @@ User.prototype.post_entrar = function(req, res, next) {
                         token: token
                     });
                 })
+            }else{
+              return res.status(401).send("No autorizado");
             }
         })
+    }else{
+      return res.status(401).send("No autorizado");
     }
 }
 
@@ -50,7 +54,9 @@ User.prototype.post_registrar = function(req, res, next) {
                 url: this.url + "1|" + req.body.razon + "|" + req.body.rfc + "|" + req.body.email + "|" + req.body.pass
             },
             function(error, response, body) {
-                console.log(body)
+                console.log("Registro")
+                console.log(response)
+                res.send("ok")
                 if (error) res.send(error)
                 if (!error && response.statusCode == 200) {
                     res.send("ok")

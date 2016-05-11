@@ -36,7 +36,7 @@ var ExpressServer = function(config) {
     }
 
     for (var controller in router) {
-        var middles = new router[controller]().middlewares || [];
+        var middles = new router[controller](this.config).middlewares || [];
         for (var funcionalidad in router[controller].prototype) {
             var method = funcionalidad.split('_')[0];
             var entorno = funcionalidad.split('_')[1];

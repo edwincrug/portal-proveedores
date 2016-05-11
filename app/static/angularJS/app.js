@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-var app = angular.module('app', ['ui.router', 'angularFileUpload','httpHelper','ngCookies'])
+var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode({
             enabled: true,
@@ -14,50 +14,70 @@ var app = angular.module('app', ['ui.router', 'angularFileUpload','httpHelper','
         $stateProvider
             .state('login', {
                 url: '/',
-                templateUrl: 'angularJS/templates/login.html',
-                controller: 'loginController'
+                views: {
+                    admin: {
+                        templateUrl: '/angularJS/templates/login.html',
+                        controller: 'loginController'
+                    }
+                }
             })
             .state('signup', {
                 url: '/registro',
-                templateUrl: 'angularJS/templates/signup.html',
+                templateUrl: '/angularJS/templates/signup.html',
                 controller: 'signupController'
             })
             .state('admin', {
                 abstrac: true,
-                templateUrl: 'angularJS/templates/admin.html'
-            })
-            .state('admin.content', {
-                url: '/ordenes',
                 admin: true,
-                params: { data: ""},
+                templateUrl: '/angularJS/templates/admin.html',
+                controller: 'adminController',
                 views: {
-                    news: {
-                        templateUrl: 'angularJS/templates/news.html'
-                    },
-                    pOrder: {
-                        templateUrl: 'angularJS/templates/pOrder.html',
-                        controller: 'pOrderController'
-                    },
-                    iPortal: {
-                        templateUrl: 'angularJS/templates/iPortal.html',
-                        controller: 'iPortalController'
-                    },
-                    oPaid: {
-                        templateUrl: 'angularJS/templates/oPaid.html',
-                        controller: 'oPaidController'
-                    },
-                    account: {
-                        templateUrl: 'angularJS/templates/account.html',
-                        controller: 'userController'
+                    admin: {
+                        templateUrl: '/angularJS/templates/admin.html',
+                        controller: 'adminController',
                     },
                     fileUpload: {
-                        templateUrl: 'angularJS/templates/fileUpload.html',
+                        templateUrl: '/angularJS/templates/fileUpload.html',
                         controller: 'fileUploadController'
                     }
-
                 }
             })
-
+            .state('admin.news', {
+                url: '/noticias',
+                admin: true,
+                templateUrl: '/angularJS/templates/news.html',
+                controller: 'newsController'
+            })
+            .state('admin.detail', {
+                url: "/noticias/{id:int}",
+                admin: true,
+                templateUrl: '/angularJS/templates/detailNew.html',
+                controller: 'detailNewsController'
+            })
+            .state('admin.pOrder', {
+                url: '/ordenes-pendientes',
+                admin: true,
+                templateUrl: '/angularJS/templates/pOrder.html',
+                controller: 'pOrderController'
+            })
+            .state('admin.iPortal', {
+                url: '/ordenes-ingresadas',
+                admin: true,
+                templateUrl: '/angularJS/templates/iPortal.html',
+                controller: 'iPortalController'
+            })
+            .state('admin.oPaid', {
+                url: '/ordenes-pagadas',
+                admin: true,
+                templateUrl: '/angularJS/templates/oPaid.html',
+                controller: 'oPaidController'
+            })
+            .state('admin.account', {
+                url: '/cuenta',
+                admin: true,
+                templateUrl: '/angularJS/templates/account.html',
+                controller: 'userController'
+            })
         $urlRouterProvider.otherwise('/');
     });
 

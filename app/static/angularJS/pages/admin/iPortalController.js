@@ -1,24 +1,29 @@
-app.controller('iPortalController', function($scope, $stateParams, $filter, Company, Branch, Order, File) {
-    var idProvider = $stateParams.data.per_idpersona;
+app.controller('iPortalController', function($scope, $stateParams, $filter, Company, Branch, Order, File, User) {
     $scope.companyList = [];
     $scope.branchList = [];
     $scope.orderList = [];
-    $scope.itemsPerPage = 10;
+    $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
     $scope.branchSelectVisible = false;
+    $scope.visible = false;
     var totalElements;
 
-    Order.getEnterByProvider(idProvider)
-        .then(function(res) {
-            $scope.orderList = res.data;
-            totalElements = $scope.orderList.length;
-        })
+    User.me().then(function(data) {
+        $scope.idProvider = data.data.ppro_userId;
 
-    Company.getByProvider(idProvider)
-        .then(function(res) {
-            $scope.companyList = res.data;
-            $scope.company = $scope.companyList[0];
-        });
+        Order.getEnterByProvider($scope.idProvider)
+            .then(function(res) {
+                $scope.orderList = res.data;
+                totalElements = $scope.orderList.length;
+                $scope.visible = true;
+            })
+
+        Company.getByProvider($scope.idProvider)
+            .then(function(res) {
+                $scope.companyList = res.data;
+                $scope.company = $scope.companyList[0];
+            });
+    })
 
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {

@@ -6,7 +6,6 @@ app.controller('signupController', function($scope, User) {
 
 
     $scope.submit = function() {
-        console.log("sugmnit")
         User.signup($scope.razon, $scope.email, $scope.rfc, $scope.pass)
             .success(function(data, status, headers, config) {
                 console.log(data)
@@ -30,4 +29,10 @@ app.controller('signupController', function($scope, User) {
     }
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+
+
 });

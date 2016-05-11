@@ -6,54 +6,13 @@
                 <h2 class="modal-title" id="fileModalLabel">Subir factura</h2>
             </div>
             <div class="modal-body">
-              <form id="formUpload">
-
-
-                <div class="fileUpload btn btn-block btn-primary andrade-color">
-                    <span>Selecciona XML</span>
-                    <input multiple id="fileUploadXML" type="file" accept=".xml" class="upload" nv-file-select uploader="uploader" />
-                </div>
-                <div class="fileUpload btn btn-block btn-primary andrade-color">
-                    <span>Selecciona PDF</span>
-                    <input multiple id="fileUploadPDF"  type="file" accept=".pdf" class="upload" nv-file-select uploader="uploader" />
-                </div>
-                  </form>
-                <div ng-repeat="item in uploader.queue" class="row">
-                    <div class="col-xs-8">
-                        <b>{{item.file.name}}</b>
+                <form class="dropzone" id="fileUpload"></form>
+                <div  class="row">
+                    <div class="col-sm-12">
+                      <br>
+                        <button ng-show="uploadButton" ng-click="uploadInvoice()" class="btn btn-primary btn-block" type="button" name="button">Subir factura</button>
+                        <button ng-show="closeButton" data-dismiss="modal"  class="btn btn-success btn-block" type="button" name="button">Cerrar</button>
                     </div>
-                    <div ng-show="item.isUploading" class="col-xs-4">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{item.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.progress}}%">
-                                <span class="sr-only">{{item.progress}}% Completo</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--isSuccess-->
-                    <div ng-show="item.isSuccess" class="col-xs-4">
-                        <span>El archivo se guardo correctamente.</span>
-                    </div>
-
-                    <!--isError-->
-                    <div ng-show="item.isError" class="col-xs-12 col-sm-4">
-                        <span>El archivo no se cargo, intenta de nuevo.</span>
-                    </div>
-                    <br>
-                </div>
-                <br>
-                <div class="row" ng-show="uploader.queue.length==2 && !uploaderDone">
-                    <div class="col-xs-6">
-                        <button class="btn btn-success btn-block" ng-click="uploader.uploadAll()">Subir</button>
-                    </div>
-                    <div class="col-xs-6">
-                        <button class="btn btn-danger btn-block" ng-click="uploader.clearQueue()">Cancelar</button>
-                    </div>
-
-                </div>
-                <div ng-show="uploaderDone" class="row">
-                  <div class="col-xs-push-2 col-xs-8">
-                      <button ng-click="closeModal()" class="btn btn-primary btn-block">Cerrar</button>
-                  </div>
                 </div>
             </div>
         </div>
