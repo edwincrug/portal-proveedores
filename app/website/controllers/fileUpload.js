@@ -39,9 +39,15 @@ FileUpload.prototype.post_files = function(req, res, next) {
 
         for (var i in req.files) {
             request.post({
-                url: this.url + "1|files|" + req.body.folio[i] + "|" +
-                 req.body.provider[i] + "|" + req.body.rfc[i] + "|" + req.
-                 files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1) + "|" + req.files[i].filename
+                url: this.url + "1",
+                form: {
+                    dir: "files",
+                    folio: req.body.folio[i],
+                    proveedor: req.body.provider[i],
+                    rfc: req.body.rfc[i],
+                    tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
+                    nombre: req.files[i].filename
+                }
             }, function(err, httpResponse, body) {
                 if (err) {
                     return console.error('upload failed:', err);

@@ -23,8 +23,13 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
             })
             .state('signup', {
                 url: '/registro',
-                templateUrl: '/angularJS/templates/signup.html',
-                controller: 'signupController'
+                views: {
+                    admin: {
+                      templateUrl: '/angularJS/templates/signup.html',
+                      controller: 'signupController'
+                    }
+                }
+
             })
             .state('admin', {
                 abstrac: true,

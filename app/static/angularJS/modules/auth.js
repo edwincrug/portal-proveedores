@@ -8,7 +8,7 @@ app.run(function($rootScope, User, $state) {
                     })
                 }, function(err) {
                     event.preventDefault();
-                    $state.go('login')
+                   $state.go('login')
                 })
             }
 

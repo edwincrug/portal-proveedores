@@ -1,6 +1,13 @@
-app.controller('fileUploadController', function($scope, File) {
+app.controller('fileUploadController', function($scope, File, Utils, Order) {
     $scope.uploadButton = false;
     $scope.closeButton = false;
+    $('#fileModal').on('shown.bs.modal', function(e) {
+        Order.getDocuments("File.order").then(function(d) {
+            var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
+            $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');
+        });
+    });
+
 
     var dropzone = new Dropzone("#fileUpload", {
         url: "api/fileUpload/files/",
@@ -50,5 +57,6 @@ app.controller('fileUploadController', function($scope, File) {
         $scope.uploadButton = false;
         $scope.closeButton = false;
         dropzone.removeAllFiles();
+         $("#pdfDisplay").remove();
     })
 })

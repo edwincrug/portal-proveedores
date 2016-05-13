@@ -13,7 +13,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="cuenta">Cuenta</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Salir</a></li>
+                            <li><a ng-click="logout()" href="#">Salir</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -21,13 +21,13 @@
                     </div>
                 </li>
                 <li>
-                    <a href="noticias"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Noticias</span></a>
+                    <a href="/noticias"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Noticias</span></a>
                 </li>
                 <li>
-                    <a href="ordenes-pendientes"><i class="fa fa-file-o"></i> <span class="nav-label">Ordenes</span></a>
+                    <a href="/ordenes-pendientes"><i class="fa fa-file-o"></i> <span class="nav-label">Ordenes</span></a>
                 </li>
                 <li>
-                    <a href="ordenes-pendientes"><i class="fa fa-user"></i> <span class="nav-label">Cuenta</span></a>
+                    <a href="/cuenta"><i class="fa fa-user"></i> <span class="nav-label">Cuenta</span></a>
                 </li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <h3 class="m-r-lg text-muted welcome-message">Portal provedores</h3>
+                        <h3 class="m-r-lg text-muted welcome-message"><strong>GRUPO ANDRADE | </strong>Portal provedores</h3>
                     </li>
 
                     <li class="dropdown">
@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/">
+                        <a ng-click="logout()" href="#">
                             <i class="fa fa-sign-out"></i> Cerrar sesión
                         </a>
                     </li>

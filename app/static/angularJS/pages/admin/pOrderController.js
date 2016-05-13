@@ -48,6 +48,14 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     }
 
     $scope.uploadinvoice = function(order) {
+      Order.pendingSeen(order.oce_folioorden).then(function(data){
+          $scope.orderList.forEach(function(o,i){
+            if(o.oce_folioorden === order.oce_folioorden){
+              $scope.orderList[i].visto = 2;
+            }
+          })
+      })
+
         File.order = {
             provider: $scope.idProvider,
             rfc: order.per_rfc,

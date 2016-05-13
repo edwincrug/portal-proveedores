@@ -1,4 +1,4 @@
-app.controller('adminController', function($scope, User, Alert) {
+app.controller('adminController', function($scope,$state, User, Alert) {
     User.me().then(function(user) {
         $scope.razonSocial = user.data.razonSocial;
         $scope.rfc = user.data.rfc;
@@ -6,16 +6,20 @@ app.controller('adminController', function($scope, User, Alert) {
         Alert.getAlerts(user.data.rfc).then(function(alerts) {
             for (var i in alerts.data) {
                 if (alerts.data[i].idTipo == 1) {
-                  $scope.alertNewOrder =  alerts.data[i];
+                    $scope.alertNewOrder = alerts.data[i];
                 } else if (alerts.data[i].idTipo == 2) {
-                  $scope.alertNews =  alerts.data[i];
+                    $scope.alertNews = alerts.data[i];
                 }
             }
         })
 
     })
 
-
+    $scope.logout = function() {
+        User.logout().then(function() {
+            $state.go("login");
+        });
+    }
 
     $(document).ready(function() {
         // Add body-small class if window less than 768px

@@ -5,7 +5,7 @@
 // -- Modificó:
 // -- Fecha:
 // -- =============================================
-app.factory('alertFactory', function() {
+app.factory('AlertFactory', function() {
     return {
         success: function(text) {
             toastr.options = {
@@ -24,6 +24,13 @@ app.factory('alertFactory', function() {
         error: function(text) {
             toastr.options = {
                 "positionClass": "toast-top-right",
+                "closeButton": true
+            }
+            toastr.error(text, 'Error');
+        },
+        errorTopFull: function(text) {
+            toastr.options = {
+                "positionClass": "toast-top-full-width",
                 "closeButton": true
             }
             toastr.error(text, 'Error');
