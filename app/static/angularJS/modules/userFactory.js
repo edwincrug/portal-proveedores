@@ -15,6 +15,14 @@ app.factory("User", function($http,$cookies) {
                 pass: pass
             });
         },
+        update: function(razon,rfc,value,type) {
+            return $http.post(url + 'editar/', {
+                razon:razon,
+                rfc: rfc,
+                value: value,
+                type: type
+            });
+        },
         logout:function(){
           return $http.post(url + 'salir/');
         },

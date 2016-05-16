@@ -14,12 +14,18 @@
 
                 <div>
                     <div class="ibox-content profile-content">
+                        <div class="text-center profile-image">
+                            <img src="images/logo.png" class="img-circle circle-border m-b-md" alt="profile">
+                        </div>
                         <h3>{{user.razonSocial}}</h3>
                         <h4><strong>RFC:</strong> {{user.rfc}}</h4>
                         <div class="user-button">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a type="button" class="btn btn-primary btn-sm pull-right"><i class="fa fa-paperclip"></i>  Subir logo</a>
+                                    <div class="fileUpload btn btn-sm btn-primary">
+                                        <span>Subir logo</span>
+                                        <input type="file" class="upload" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +40,8 @@
                 </div>
                 <div class="ibox-content">
                     <p>
-                        El correo configurado actualmente es el siguiente:<br><strong>correo@correo.com</strong>
+                        El correo configurado actualmente es el siguiente:
+                        <br><strong>{{user.correo}}</strong>
                     </p>
                     <br>
                     <form class="" role="form" ng-submit="submitEmail()">
@@ -45,7 +52,7 @@
                                 </div>
                             </div>
                             <div class=" col-sm-4">
-                                <input type="submit" class="btn  btn-sm  btn-primary btn-block" value="Actualizar" />
+                                <input type="submit" ng-click="updateEmail()" class="btn  btn-sm  btn-primary btn-block" value="Actualizar" />
                             </div>
                         </div>
                     </form>
@@ -70,7 +77,7 @@
                                 </div>
                             </div>
                             <div class=" col-sm-4">
-                                <input type="submit" class="btn  btn-sm  btn-primary btn-block" value="Actualizar" />
+                                <input type="submit" ng-click="updatePassWord()" class="btn  btn-sm  btn-primary btn-block" value="Actualizar" />
                             </div>
                         </div>
                     </form>

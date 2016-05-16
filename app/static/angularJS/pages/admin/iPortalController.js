@@ -50,7 +50,11 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     }
 
     $scope.uploadinvoice = function(order) {
-        File.order = order;
+      File.order = {
+          provider: $scope.idProvider,
+          rfc: order.per_rfc,
+          folio: order.oce_folioorden
+      };
     }
 
     function filterApply() {

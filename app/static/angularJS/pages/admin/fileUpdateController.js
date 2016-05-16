@@ -1,16 +1,29 @@
-app.controller('fileUploadController', function($scope, File, Utils, Order) {
-    $scope.uploadButton = false;
-    $scope.closeButton = false;
+app.controller('fileUpdateController', function($scope, File, Utils, Order) {
+
     $scope.loadingOrder = true;
-    $('#fileModal').on('shown.bs.modal', function(e) {
-        Order.getDocuments(File.order.folio).then(function(d) {
-            var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
-            $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');
-            $scope.loadingOrder = false;
-        });
-    });
+    $('#fileUpdateModal').on('shown.bs.modal', function(e) {
+            Order.getDocuments(File.order.folio).then(function(d) {
+                console.log(d.data[0])
+                var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
+                $("<object class='filesUpdate' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfUpdateContent');
+                if (d.data[0].pathXML != null)
+                    $("<object class='filesUpdate' data='" + d.data[0].pathXML + "' width='100%' height='400px' >").appendTo('#xmlInvoceContent');
+                if (d.data[0].pathPDF != null)
+                    $("<object class='filesUpdate' data='" + d.data[0].pathPDF + "' width='100%' height='400px' >").appendTo('#pdfInvoceContent');
 
+                $scope.loadingOrder = false;
+            });
+        })
+        /*$scope.uploadButton = false;
+        $scope.closeButton = false;
+        */
 
+    //
+
+    //
+    //});
+
+    /*
     var dropzone = new Dropzone("#fileUpload", {
         url: "api/fileUpload/files/",
         uploadMultiple: true,
@@ -54,12 +67,10 @@ app.controller('fileUploadController', function($scope, File, Utils, Order) {
 
     $scope.uploadInvoice = function() {
         dropzone.processQueue();
-    }
-    $('#fileModal').on('hidden.bs.modal', function(e) {
-        $scope.uploadButton = false;
-        $scope.closeButton = false;
+    }*/
+    $('#fileUpdateModal').on('hidden.bs.modal', function(e) {
         $scope.loadingOrder = true;
-        dropzone.removeAllFiles();
-        $("#pdfDisplay").remove();
+        $(".filesUpdate").remove();
+
     })
 })

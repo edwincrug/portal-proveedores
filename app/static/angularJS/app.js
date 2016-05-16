@@ -25,8 +25,8 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                 url: '/registro',
                 views: {
                     admin: {
-                      templateUrl: '/angularJS/templates/signup.html',
-                      controller: 'signupController'
+                        templateUrl: '/angularJS/templates/signup.html',
+                        controller: 'signupController'
                     }
                 }
 
@@ -44,6 +44,10 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                     fileUpload: {
                         templateUrl: '/angularJS/templates/fileUpload.html',
                         controller: 'fileUploadController'
+                    },
+                    fileUpdate: {
+                        templateUrl: '/angularJS/templates/fileUpdate.html',
+                        controller: 'fileUpdateController'
                     }
                 }
             })

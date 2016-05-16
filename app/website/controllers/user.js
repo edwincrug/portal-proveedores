@@ -27,22 +27,26 @@ User.prototype.post_entrar = function(req, res, next) {
                         token: token
                     });
                 })
-            }else{
-              return res.status(401).send("No autorizado");
+            } else {
+                return res.status(401).send("No autorizado");
             }
         })
-    }else{
-      return res.status(401).send("No autorizado");
+    } else {
+        return res.status(401).send("No autorizado");
     }
 }
 
 User.prototype.post_salir = function(req, res, next) {
     var self = this;
-      auth = new Auth(self.conf);
+    auth = new Auth(self.conf);
     auth.getUser(req, res, next, function(user) {
-        auth.removeUser(user,function(err,data){
-          if(err) return res.json({response:"error"})
-          res.json({response:"ok"})
+        auth.removeUser(user, function(err, data) {
+            if (err) return res.json({
+                response: "error"
+            })
+            res.json({
+                response: "ok"
+            })
         })
     })
 }
@@ -51,25 +55,45 @@ User.prototype.post_registrar = function(req, res, next) {
     var self = this;
     if (req.body.razon && req.body.email && req.body.rfc && req.body.pass) {
         request.post({
-                url: this.url + "1|" + req.body.razon + "|" + req.body.rfc + "|" + req.body.email + "|" + req.body.pass
+                url: this.url + "1",
+                form: {
+                    razon: req.body.razon,
+                    rfc: req.body.rfc,
+                    email: req.body.email,
+                    password: req.body.pass
+                }
             },
             function(error, response, body) {
                 console.log("Registro")
-                console.log(response)
+                console.log(body)
                 res.send("ok")
                 if (error) res.send(error)
                 if (!error && response.statusCode == 200) {
                     res.send("ok")
-                        /*  body = JSON.parse(body);
-                          if (!body.length > 0) return res.status(401).send("No autorizado");
-                          auth = new Auth(self.conf);
-                          auth.saveUser(body[0], function(err, token) {
-                              if (err) return err;
-                              res.json({
-                                  token: token
-                              });
-                          })
-                          */
+                }
+            })
+    }
+}
+User.prototype.post_editar = function(req, res, next) {
+    var self = this;
+    if (req.body.razon && req.body.rfc && req.body.value && req.body.type) {
+        request.post({
+                url: this.url + "2",
+                form: {
+                    razon: req.body.razon,
+                    rfc: req.body.rfc,
+                    email: req.body.value,
+                    password: req.body.value,
+                    type: req.body.type
+                }
+            },
+            function(error, response, body) {
+                console.log("Edicion")
+                console.log(body)
+                res.send("ok")
+                if (error) res.send(error)
+                if (!error && response.statusCode == 200) {
+                    res.send("ok")
                 }
             })
     }
@@ -77,7 +101,7 @@ User.prototype.post_registrar = function(req, res, next) {
 
 User.prototype.get_me = function(req, res, next) {
     var self = this;
-      auth = new Auth(self.conf);
+    auth = new Auth(self.conf);
     auth.getUser(req, res, next, function(user) {
         delete user.token;
         res.json(user);
