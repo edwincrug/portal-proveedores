@@ -36,7 +36,7 @@ FileUpload.prototype.post_files = function(req, res, next) {
             req.files[0] = req.files[1]
             req.files[1] = temp;
         }
-
+        var msg = [];
         for (var i in req.files) {
             request.post({
                 url: this.url + "1",
@@ -49,19 +49,15 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     nombre: req.files[i].filename
                 }
             }, function(err, httpResponse, body) {
-                if (err) {
-                    return res.json({
-                        error: err
-                    })
-                } else {
-                    res.json({
-                        msg: body
-                    })
+                if (body.length > 0) {
+                    console.log(body.length)
                 }
             });
         }
+        res.json({
+            msg: "ok"
+        })
     }
-
-
 }
+
 module.exports = FileUpload;
