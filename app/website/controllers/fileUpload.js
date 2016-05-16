@@ -50,15 +50,18 @@ FileUpload.prototype.post_files = function(req, res, next) {
                 }
             }, function(err, httpResponse, body) {
                 if (err) {
-                    return console.error('upload failed:', err);
+                    return res.json({
+                        error: err
+                    })
+                } else {
+                    res.json({
+                        msg: body
+                    })
                 }
-                console.log('Upload successful!  Server responded with:', body);
             });
         }
     }
 
-    res.json({
-        ok: "ok"
-    })
+
 }
 module.exports = FileUpload;
