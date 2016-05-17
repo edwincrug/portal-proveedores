@@ -7,6 +7,59 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     $scope.branchSelectVisible = false;
     $scope.visible = false;
     var totalElements;
+    //Order
+    $scope.orderDate = "";
+    $scope.orderDateValid = "";
+    $scope.orderImport = "";
+
+    $scope.changeOrderDate = function() {
+        if ($scope.orderDate == "") {
+            $scope.orderDate = "asc";
+        } else if ($scope.orderDate == "asc") {
+            $scope.orderDate = "desc";
+        } else if ($scope.orderDate == "desc") {
+            $scope.orderDate = "asc";
+        }
+        orderArrayList("fecha_factura", $scope.orderDate, true)
+    }
+
+    $scope.changeOrderDateValid = function() {
+        if ($scope.orderDateValid == "") {
+            $scope.orderDateValid = "asc";
+        } else if ($scope.orderDateValid == "asc") {
+            $scope.orderDateValid = "desc";
+        } else if ($scope.orderDateValid == "desc") {
+            $scope.orderDateValid = "asc";
+        }
+        orderArrayList("fechaValidacion", $scope.orderDateValid, true)
+    }
+
+    $scope.changeOrderImport = function() {
+        if ($scope.orderImport == "") {
+            $scope.orderImport = "asc";
+        } else if ($scope.orderImport == "asc") {
+            $scope.orderImport = "desc";
+        } else if ($scope.orderImport == "desc") {
+            $scope.orderImport = "asc";
+        }
+        orderArrayList("oce_importetotal", $scope.orderImport, false)
+    }
+
+    function orderArrayList(field, order, date) {
+
+        $scope.orderList.sort(function(a, b) {
+            if (date) {
+                a[field] = new Date(a[field]).getTime();
+                b[field] = new Date(b[field]).getTime();
+
+            }
+            if (order == "asc") {
+                return a[field] - b[field]
+            } else if (order == "desc") {
+                return b[field] - a[field]
+            }
+        })
+    }
 
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId;
@@ -50,15 +103,15 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     }
 
     $scope.uploadinvoice = function(order) {
-      File.order = {
-          provider: $scope.idProvider,
-          rfc: order.per_rfc,
-          folio: order.oce_folioorden
-      };
+        File.order = {
+            provider: $scope.idProvider,
+            rfc: order.per_rfc,
+            folio: order.oce_folioorden
+        };
     }
 
     function filterApply() {
-        totalElements = $filter('order')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;
+        totalElements = $filter('filter')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;
         $scope.currentPage = 0;
     }
     //Pagination

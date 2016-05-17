@@ -1,21 +1,18 @@
-app.controller('signupController', function($scope, User) {
+app.controller('signupController', function($scope, User, AlertFactory) {
     $scope.razon = ""
     $scope.email = ""
     $scope.rfc = ""
     $scope.pass = ""
 
-
     $scope.submit = function() {
         User.signup($scope.razon, $scope.email, $scope.rfc, $scope.pass)
             .success(function(data, status, headers, config) {
-                console.log(data)
-                    /*if (data.token) {
-                User.saveToken(data.token);
-                $state.go("admin.content");
-            }*/
+                if (data[0].estatus == "ok") {
+                    AlertFactory.infoTopFull("Se ha envidado un correo con las instrucciones de activacion a la cuenta que proporcionaste, ")
+                    AlertFactory.successTopFull(data[0].mensaje)
+                } else {}
             })
     }
-
 
     var password = document.getElementById("pass"),
         confirm_password = document.getElementById("passConfirm");

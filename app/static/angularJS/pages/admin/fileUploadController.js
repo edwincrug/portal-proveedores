@@ -3,6 +3,7 @@ app.controller('fileUploadController', function($scope, File, Utils, Order) {
     $scope.closeButton = false;
     $scope.loadingOrder = true;
     $('#fileModal').on('shown.bs.modal', function(e) {
+        $("#fileModalLabel").text("Orden " + File.order.folio)
         Order.getDocuments(File.order.folio).then(function(d) {
             var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
             $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');

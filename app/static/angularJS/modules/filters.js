@@ -28,7 +28,7 @@ app.filter('branch', function() {
         }
     };
 });
-
+/*
 app.filter('order', function() {
     return function(input, order) {
         if(order && order.length>0){
@@ -40,3 +40,4 @@ app.filter('order', function() {
         }
     };
 });
+*/

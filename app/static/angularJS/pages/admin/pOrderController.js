@@ -6,6 +6,49 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     $scope.currentPage = 0;
     $scope.branchSelectVisible = false;
     $scope.visible = false;
+    //Order
+    $scope.orderDate = "";
+    $scope.orderImport = "";
+
+    $scope.changeOrderDate = function() {
+        if ($scope.orderDate == "") {
+            $scope.orderDate = "asc";
+        } else if ($scope.orderDate == "asc") {
+            $scope.orderDate = "desc";
+        } else if ($scope.orderDate == "desc") {
+            $scope.orderDate = "asc";
+        }
+        orderArrayList("oce_fechaorden", $scope.orderDate, true)
+    }
+
+    $scope.changeOrderImport = function() {
+        if ($scope.orderImport == "") {
+            $scope.orderImport = "asc";
+        } else if ($scope.orderImport == "asc") {
+            $scope.orderImport = "desc";
+        } else if ($scope.orderImport == "desc") {
+            $scope.orderImport = "asc";
+        }
+        orderArrayList("oce_importetotal", $scope.orderImport, false)
+    }
+
+    function orderArrayList(field, order, date) {
+
+        $scope.orderList.sort(function(a, b) {
+            if (date) {
+                a[field] = new Date(a[field]).getTime();
+                b[field] = new Date(b[field]).getTime();
+
+            }
+            if (order == "asc") {
+                return a[field] - b[field]
+            } else if (order == "desc") {
+                return b[field] - a[field]
+            }
+        })
+    }
+
+
     var totalElements;
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId
@@ -48,13 +91,13 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     }
 
     $scope.uploadinvoice = function(order) {
-      Order.pendingSeen(order.oce_folioorden).then(function(data){
-          $scope.orderList.forEach(function(o,i){
-            if(o.oce_folioorden === order.oce_folioorden){
-              $scope.orderList[i].visto = 2;
-            }
-          })
-      })
+        Order.pendingSeen(order.oce_folioorden).then(function(data) {
+            $scope.orderList.forEach(function(o, i) {
+                if (o.oce_folioorden === order.oce_folioorden) {
+                    $scope.orderList[i].visto = 2;
+                }
+            })
+        })
 
         File.order = {
             provider: $scope.idProvider,
@@ -66,7 +109,7 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
 
 
     function filterApply() {
-        totalElements = $filter('order')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;
+        totalElements = $filter('filter')($filter('branch')(($filter('company')($scope.orderList, $scope.company)), $scope.branch), $scope.order).length;
         $scope.currentPage = 0;
     }
     //Pagination

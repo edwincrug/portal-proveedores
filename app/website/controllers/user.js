@@ -64,16 +64,20 @@ User.prototype.post_registrar = function(req, res, next) {
                 }
             },
             function(error, response, body) {
-                console.log("Registro")
-                console.log(body)
-                res.send("ok")
-                if (error) res.send(error)
+              console.log(error)
+              console.log(response.statusCode )
+              console.log(body)
+
                 if (!error && response.statusCode == 200) {
-                    res.send("ok")
+                  res.json(JSON.parse(body));
+
+                }else{
+                  res.json({});
                 }
             })
     }
 }
+
 User.prototype.post_editar = function(req, res, next) {
     var self = this;
     if (req.body.razon && req.body.rfc && req.body.value && req.body.type) {
@@ -88,16 +92,13 @@ User.prototype.post_editar = function(req, res, next) {
                 }
             },
             function(error, response, body) {
-                console.log("Edicion")
-                console.log(body)
-                res.send("ok")
-                if (error) res.send(error)
                 if (!error && response.statusCode == 200) {
-                    res.send("ok")
+                    res.json(JSON.parse(body));
                 }
             })
     }
 }
+
 
 User.prototype.get_me = function(req, res, next) {
     var self = this;

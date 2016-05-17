@@ -48,6 +48,10 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                     fileUpdate: {
                         templateUrl: '/angularJS/templates/fileUpdate.html',
                         controller: 'fileUpdateController'
+                    },
+                    fileCheck: {
+                        templateUrl: '/angularJS/templates/fileCheck.html',
+                        controller: 'fileCheckController'
                     }
                 }
             })
@@ -86,6 +90,14 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                 admin: true,
                 templateUrl: '/angularJS/templates/account.html',
                 controller: 'userController'
+            }).state('activatePending', {
+                url: '/activacion-pendiente',
+                //admin: true,
+                views: {
+                    admin: {
+                        templateUrl: '/angularJS/templates/activatePending.html',
+                    }
+                }
             })
         $urlRouterProvider.otherwise('/');
     });

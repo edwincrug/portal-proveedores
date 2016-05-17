@@ -4,19 +4,22 @@
         <br>
         <div class="row nav-orders">
             <div class="col-sm-4">
-                <button ui-sref="admin.pOrder" class="btn btn-block btn-primary  animated pulse " type="button">Pendientes</button>
+                <button ui-sref="admin.pOrder" class="btn btn-block btn-primary  animated pulse " type="button"><i class="fa fa-clock-o"></i>
+                    <br>Pendientes</button>
             </div>
             <div class="col-sm-4">
-                <button ui-sref="admin.iPortal" class="btn btn-block btn-primary btn-outline " type="button">Ingresadas</button>
+                <button ui-sref="admin.iPortal" class="btn btn-block btn-primary btn-outline " type="button"><i class="fa fa-folder-open-o"></i>
+                    <br>Ingresadas</button>
             </div>
             <div class="col-sm-4">
-                <button ui-sref="admin.oPaid" class="btn btn-block btn-primary btn-outline " type="button">Pagadas</button>
+                <button ui-sref="admin.oPaid" class="btn btn-block btn-primary btn-outline " type="button"><i class="fa fa-usd"></i>
+                    <br> Pagadas</button>
             </div>
         </div>
     </div>
 </div>
 <div class="wrapper wrapper-content">
-    <div ng-show="visible" class="text-center animated fadeIn">
+    <div ng-show="visible" class="text-center animated fadeInRight">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
@@ -49,23 +52,30 @@
                                 <tr>
                                     <th>Orden de compra</th>
                                     <th>Detalle</th>
-                                    <th>Importe</th>
+                                    <th>Fecha
+                                        <button ng-click="changeOrderDate()" ng-class="{'fa-sort': orderDate=='','fa-sort-asc': orderDate=='asc','fa-sort-desc': orderDate=='desc'}" class="btn btn-xs fa pull-right" type="button" name="button"></button>
+                                    </th>
+                                    <th>Importe
+                                        <button ng-click="changeOrderImport()" ng-class="{'fa-sort': orderImport=='','fa-sort-asc': orderImport=='asc','fa-sort-desc': orderImport=='desc'}"  class="btn btn-xs fa pull-right" type="button" name="button"></button>
+                                    </th>
                                     <th>Adjuntar</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-class="{'bg-success':order.visto==1}" ng-repeat="order in orderList | company : company
-                      | branch:branch | order : order | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+                      | branch:branch | filter : order | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
                                     <td>
                                         {{order.oce_folioorden}}
-                                        <br> {{order.per_rfc}}
                                     </td>
                                     <td>
                                         {{order.emp_nombre}}
                                         <br> {{order.suc_nombre}}
                                         <br> {{order.dep_nombre}}
                                     </td>
-                                    <td>
+                                    <td width="110px">
+                                        {{order.oce_fechaorden | date:"dd/MM/yyyy"}}
+                                    </td>
+                                    <td width="110px">
                                         {{order.oce_importetotal | currency}}
                                     </td>
                                     <td>
@@ -75,13 +85,14 @@
                             </tbody>
                         </table>
                     </div>
+                    Pagina {{currentPage+1}} de {{pageCount()+1}}
                     <div class="admin-pagination">
                         <ul class="pagination">
                             <li ng-class="prevPageDisabled()">
                                 <a href ng-click="prevPage()"><i class="fa fa-chevron-left"></i></a>
                             </li>
-                            <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                                <a href="#">{{n+1}}</a>
+                            <li ng-repeat="n in range()"  ng-click="setPage(n)">
+                                <a ng-class="{'navy-bg': n == currentPage}" href="#">{{n+1}}</a>
                             </li>
                             <li ng-class="nextPageDisabled()">
                                 <a href ng-click="nextPage()"><i class="fa fa-chevron-right"></i></a>

@@ -2,7 +2,6 @@ app.controller('userController', function($scope, User, $state) {
 
     User.me().then(function(user) {
         $scope.user = user.data
-        console.log($scope.user)
     })
 
     $scope.updateEmail = function() {

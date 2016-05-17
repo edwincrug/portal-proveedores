@@ -2,29 +2,23 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
 
     $scope.loadingOrder = true;
     $('#fileUpdateModal').on('shown.bs.modal', function(e) {
-            Order.getDocuments(File.order.folio).then(function(d) {
-                console.log(d.data[0])
-                var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
-                $("<object class='filesUpdate' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfUpdateContent');
-                if (d.data[0].pathXML != null)
-                    $("<object class='filesUpdate' data='" + d.data[0].pathXML + "' width='100%' height='400px' >").appendTo('#xmlInvoceContent');
-                if (d.data[0].pathPDF != null)
-                    $("<object class='filesUpdate' data='" + d.data[0].pathPDF + "' width='100%' height='400px' >").appendTo('#pdfInvoceContent');
+        $("#fileModalUpdateLabel").text("Orden  " + File.order.folio)
+        Order.getDocuments(File.order.folio).then(function(d) {
+            console.log(d.data[0])
+            var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
+            $("<object class='filesUpdate' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfUpdateContent');
+            if (d.data[0].pathXML != null)
+                $('#xmlInvoceContent').text(d.data[0].pathXML);
+            if (d.data[0].pathPDF != null)
+                $("<object class='filesUpdate' data='" + d.data[0].pathPDF + "' width='100%' height='400px' >").appendTo('#pdfInvoceContent');
 
-                $scope.loadingOrder = false;
-            });
-        })
-        /*$scope.uploadButton = false;
-        $scope.closeButton = false;
-        */
+            $scope.loadingOrder = false;
+        });
+    })
+    $scope.uploadButton = false;
+    $scope.closeButton = false;
 
-    //
-
-    //
-    //});
-
-    /*
-    var dropzone = new Dropzone("#fileUpload", {
+    var dropzone = new Dropzone("#fileUploadUpdate", {
         url: "api/fileUpload/files/",
         uploadMultiple: true,
         autoProcessQueue: false,
@@ -67,10 +61,13 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
 
     $scope.uploadInvoice = function() {
         dropzone.processQueue();
-    }*/
+    }
     $('#fileUpdateModal').on('hidden.bs.modal', function(e) {
         $scope.loadingOrder = true;
         $(".filesUpdate").remove();
 
     })
 })
+
+
+//5579 0700 5568 1855
