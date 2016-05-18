@@ -98,6 +98,14 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                         templateUrl: '/angularJS/templates/activatePending.html',
                     }
                 }
+            }).state('validating', {
+                url: '/activacionCuenta',
+                views: {
+                    admin: {
+                        templateUrl: '/angularJS/templates/validate.html',
+                        controller: 'validateController'
+                    }
+                }
             })
         $urlRouterProvider.otherwise('/');
     });

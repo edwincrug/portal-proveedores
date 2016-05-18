@@ -13,6 +13,7 @@ var User = function(conf) {
     }
 }
 
+
 User.prototype.post_entrar = function(req, res, next) {
     var self = this;
     if (req.body.rfc && req.body.pass) {
@@ -21,6 +22,7 @@ User.prototype.post_entrar = function(req, res, next) {
                 body = JSON.parse(body);
                 if (!body.length > 0) return res.status(401).send("No autorizado");
                 auth = new Auth(self.conf);
+                body[0].correo = decodeURIComponent(body[0].correo)
                 auth.saveUser(body[0], function(err, token) {
                     if (err) return err;
                     res.json({
@@ -64,15 +66,12 @@ User.prototype.post_registrar = function(req, res, next) {
                 }
             },
             function(error, response, body) {
-              console.log(error)
-              console.log(response.statusCode )
-              console.log(body)
 
                 if (!error && response.statusCode == 200) {
-                  res.json(JSON.parse(body));
+                    res.json(JSON.parse(body));
 
-                }else{
-                  res.json({});
+                } else {
+                    res.json({});
                 }
             })
     }
@@ -109,6 +108,54 @@ User.prototype.get_me = function(req, res, next) {
     })
 
 }
+
+
+User.prototype.post_validar = function(req, res, next) {
+    var self = this;
+    if (req.body.rfc && req.body.token) {
+        request.post({
+                url: this.url + "3",
+                form: {
+                    token: req.body.token,
+                    rfc: req.body.rfc,
+                    opcion: 1
+                }
+            },
+            function(error, response, body) {
+                body = JSON.parse(body);
+                res.json(body);
+            })
+    } else {
+        res.json({
+            estatus: "error",
+            mensaje: "Parametros incorrectos"
+        });
+
+    }
+}
+User.prototype.post_activar = function(req, res, next) {
+    var self = this;
+    if (req.body.token && req.body.rfc && req.body.option) {
+        request.post({
+                url: this.url + "4",
+                form: {
+                    token: req.body.token,
+                    rfc: req.body.rfc,
+                    opcion: req.body.option
+                }
+            },
+            function(error, response, body) {
+                body = JSON.parse(body);
+                res.json(body);
+            })
+    } else {
+        res.json({
+            estatus: "error",
+            mensaje: "Parametros incorrectos"
+        });
+    }
+}
+
 
 
 

@@ -9,6 +9,7 @@ app.controller('fileUploadController', function($scope, File, Utils, Order) {
             $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');
             $scope.loadingOrder = false;
         });
+
     });
 
 
