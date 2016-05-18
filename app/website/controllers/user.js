@@ -43,12 +43,16 @@ User.prototype.post_salir = function(req, res, next) {
     auth = new Auth(self.conf);
     auth.getUser(req, res, next, function(user) {
         auth.removeUser(user, function(err, data) {
-            if (err) return res.json({
-                response: "error"
-            })
-            res.json({
-                response: "ok"
-            })
+            if (err) {
+                res.json({
+                    response: "error"
+                })
+            } else {
+                res.json({
+                    response: "ok"
+                })
+            }
+
         })
     })
 }
@@ -58,12 +62,12 @@ User.prototype.post_registrar = function(req, res, next) {
     if (req.body.razon && req.body.email && req.body.rfc && req.body.pass) {
         request.post({
                 url: this.url + "1",
-                form: {
+                form: JSON.stringify({
                     razon: req.body.razon,
                     rfc: req.body.rfc,
                     email: req.body.email,
                     password: req.body.pass
-                }
+                })
             },
             function(error, response, body) {
 
@@ -82,13 +86,13 @@ User.prototype.post_editar = function(req, res, next) {
     if (req.body.razon && req.body.rfc && req.body.value && req.body.type) {
         request.post({
                 url: this.url + "2",
-                form: {
+                form: JSON.stringify({
                     razon: req.body.razon,
                     rfc: req.body.rfc,
                     email: req.body.value,
                     password: req.body.value,
                     type: req.body.type
-                }
+                })
             },
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -112,14 +116,14 @@ User.prototype.get_me = function(req, res, next) {
 
 User.prototype.post_validar = function(req, res, next) {
     var self = this;
-    if (req.body.rfc && req.body.token) {
+    if (req.body.rfc && req.body.token && req.body.option) {
         request.post({
                 url: this.url + "3",
-                form: {
+                form: JSON.stringify({
                     token: req.body.token,
                     rfc: req.body.rfc,
-                    opcion: 1
-                }
+                    opcion: req.body.option
+                })
             },
             function(error, response, body) {
                 body = JSON.parse(body);
@@ -138,11 +142,11 @@ User.prototype.post_activar = function(req, res, next) {
     if (req.body.token && req.body.rfc && req.body.option) {
         request.post({
                 url: this.url + "4",
-                form: {
+                form: JSON.stringify({
                     token: req.body.token,
                     rfc: req.body.rfc,
                     opcion: req.body.option
-                }
+                })
             },
             function(error, response, body) {
                 body = JSON.parse(body);

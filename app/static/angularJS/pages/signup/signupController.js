@@ -10,7 +10,6 @@ app.controller('signupController', function($scope, User, AlertFactory, $state) 
                 data[0].mensaje = decodeURIComponent(data[0].mensaje)
                 if (data[0].estatus == "ok") {
                     AlertFactory.successTopFull(data[0].mensaje)
-                    console.log(data[0].mensaje)
                     $state.go("login")
                 } else {
                     AlertFactory.error(data[0].mensaje)

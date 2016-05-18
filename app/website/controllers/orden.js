@@ -67,6 +67,7 @@ Orden.prototype.get_documentos_data = function(req, res, next) {
         request.get(this.conf.parameters.server + "consultaapi/7|" + req.params.data  + "|0",
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
+
                     res.json(JSON.parse(body));
                 }
             })

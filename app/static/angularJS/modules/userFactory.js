@@ -35,17 +35,18 @@ app.factory("User", function($http, $cookies) {
         getToken: function() {
             return $cookies.get('andrade-token')
         },
-        validate: function(rfc, token) {
+        validate: function(rfc, token, op) {
             return $http.post(url + 'validar/', {
                 rfc: rfc,
-                token: token
+                token: token,
+                option: op
             });
         },
-        activate: function(rfc, token,op) {
+        activate: function(rfc, token, op) {
             return $http.post(url + 'activar/', {
                 rfc: rfc,
                 token: token,
-                option:op
+                option: op
             });
         }
     }
