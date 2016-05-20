@@ -1,4 +1,4 @@
-app.controller('userController', function($scope, User, $state,AlertFactory) {
+app.controller('userController', function($scope, User, $state, AlertFactory) {
 
     User.me().then(function(user) {
         $scope.user = user.data
@@ -7,18 +7,24 @@ app.controller('userController', function($scope, User, $state,AlertFactory) {
     $scope.updateEmail = function() {
         User.update($scope.user.razonSocial, $scope.user.rfc, $scope.newEmail, 1).then(function(data) {
             console.log(data)
+            data = data.data[0]
+            $scope.newEmail = "";
+            if (data.estatus == "ok") {
+                AlertFactory.success(data.mensaje);
+            } else {
+                AlertFactory.error(data.mensaje);
+            }
         });
     }
     $scope.updatePassWord = function() {
         User.update($scope.user.razonSocial, $scope.user.rfc, $scope.pass, 2).then(function(data) {
-            /*date = data.data[0]
-            if (data.estatus == "ok") {
-                $scope.pass = $scope.passConfirm = "";
-            } else {
-
-            }*/
+            data = data.data[0]
             $scope.pass = $scope.passConfirm = "";
-            AlertFactory.success("La contraseña se cambio correctamente.");
+            if (data.estatus == "ok") {
+                AlertFactory.success(data.mensaje);
+            } else {
+                AlertFactory.error(data.mensaje);
+            }
         });
     }
 

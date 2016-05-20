@@ -11,15 +11,34 @@ var Alerta = function(conf) {
 }
 
 Alerta.prototype.get_list_data = function(req, res, next) {
-      if (req.params.data && req.params.data !== "undefined") {
-          request(this.url + "5|0|" + req.params.data+"|0", function(error, response, body) {
-              if (!error && response.statusCode == 200) {
-                  res.json(JSON.parse(body));
-              }
+    if (req.params.data && req.params.data !== "undefined") {
+        request(this.url + "5|0|" + req.params.data + "|0", function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                res.json(JSON.parse(body));
+            }
+        })
+    } else {
+        res.json({});
+    }
+}
+
+Alerta.prototype.post_vista = function(req, res, next) {
+    if (req.body.rfc && req.body.idTipo) {
+      request.post({
+              url: this.url + "3",
+              form: JSON.stringify({
+                  rfc: req.body.rfc,
+                  idTipo: req.body.idTipo
+              })
+          },
+          function(error, response, body) {
+            console.log(body)
+              body = JSON.parse(body);
+              res.json(body);
           })
-      } else {
-          res.json({});
-      }
+    } else {
+        res.json({});
+    }
 }
 
 module.exports = Alerta;

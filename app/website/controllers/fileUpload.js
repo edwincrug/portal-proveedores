@@ -49,9 +49,9 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     nombre: req.files[i].filename
                 }
             }, function(err, httpResponse, body) {
-                if (body.length > 0) {
-                    console.log(body.length)
-                }
+
+                    console.log(body)
+              
             });
         }
         res.json({

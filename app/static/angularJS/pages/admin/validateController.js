@@ -7,7 +7,7 @@ app.controller('validateController', function($scope, $state, $location, User, A
                     data = data.data[0]
                     if (data.estatus === "ok") {
                         AlertFactory.success(data.mensaje)
-                        $state.go("admin.account")
+                        $state.go("login")
                     } else {
                         AlertFactory.error(data.mensaje)
                     }

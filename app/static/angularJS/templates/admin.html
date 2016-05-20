@@ -45,11 +45,11 @@
 
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-newspaper-o"></i> <span class="label label-warning">{{alertNews.textoAlerta}}</span>
+                            <i class="fa fa-newspaper-o"></i> <span ng-show="alertNews.idEstatus==1" class="label label-warning">{{alertNews.textoAlerta}}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-alerts">
+                        <ul ng-show="alertNews.idEstatus==1" class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="noticias">
+                                <a ng-click="viewAlert(rfc,2)" href="noticias">
                                     <div>
                                         <i class="fa fa-newspaper-o"></i> Tienes {{alertNews.textoAlerta}} noticias sin leer
                                     </div>
@@ -59,11 +59,11 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-file-o"></i> <span class="label label-primary">{{alertNewOrder.textoAlerta}}</span>
+                            <i class="fa fa-file-o"></i> <span ng-show="alertNewOrder.idEstatus==1" class="label label-primary">{{alertNewOrder.textoAlerta}}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-alerts">
+                        <ul ng-show="alertNewOrder.idEstatus==1" class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="ordenes-pendientes">
+                                <a ng-click="viewAlert(rfc,1)" href="ordenes-pendientes">
                                     <div>
                                         <i class="fa fa-file-o"></i> Tienes {{alertNewOrder.textoAlerta}} ordenes de compra sin leer
                                     </div>

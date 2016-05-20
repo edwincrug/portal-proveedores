@@ -22,4 +22,22 @@ Noticia.prototype.get_list_data = function(req, res, next) {
       }
 }
 
+Noticia.prototype.post_vista = function(req, res, next) {
+    if (req.body.idNew) {
+        request.post({
+            url: this.url + "2",
+            form: JSON.stringify({
+                idNoticia: req.body.idNew
+            })
+        }, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                res.json(JSON.parse(body));
+            }
+        })
+    } else {
+        res.json({});
+    }
+}
+
+
 module.exports = Noticia;

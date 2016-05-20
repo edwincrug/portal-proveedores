@@ -52,7 +52,12 @@ Orden.prototype.get_pagadas_data = function(req, res, next) {
 }
 Orden.prototype.post_pendientevista = function(req, res, next) {
     if (req.body.idOrder) {
-        request.post(this.conf.parameters.server + "consultaapi/1|" + req.body.idOrder, function(error, response, body) {
+        request.post({
+            url: this.conf.parameters.server + "consultaapi/1",
+            form: JSON.stringify({
+                idOrder: req.body.idOrder
+            })
+        }, function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 res.json(JSON.parse(body));
             }
@@ -63,8 +68,8 @@ Orden.prototype.post_pendientevista = function(req, res, next) {
 }
 
 Orden.prototype.get_documentos_data = function(req, res, next) {
-    if (req.params.data ) {
-        request.get(this.conf.parameters.server + "consultaapi/7|" + req.params.data  + "|0",
+    if (req.params.data) {
+        request.get(this.conf.parameters.server + "consultaapi/7|" + req.params.data + "|0",
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
 

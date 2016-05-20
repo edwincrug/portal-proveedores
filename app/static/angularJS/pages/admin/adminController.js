@@ -1,4 +1,4 @@
-app.controller('adminController', function($scope,$state, User, Alert) {
+app.controller('adminController', function($scope, $state, User, Alert) {
     User.me().then(function(user) {
         $scope.razonSocial = user.data.razonSocial;
         $scope.rfc = user.data.rfc;
@@ -14,6 +14,20 @@ app.controller('adminController', function($scope,$state, User, Alert) {
         })
 
     })
+    $scope.viewAlert = function(rfc, idAlerta) {
+        console.log(idAlerta)
+        Alert.viewAlerts(rfc, idAlerta).then(function(data) {
+            console.log(data);
+            if (data.data[0].estatus == "ok") {
+                if (idAlerta == 1) {
+                    $scope.alertNewOrder.idEstatus = 2;
+                } else if (idAlerta == 2) {
+                    $scope.alertNews.idEstatus = 2;
+                }
+            }
+        })
+
+    }
 
     $scope.logout = function() {
         User.logout().then(function() {
