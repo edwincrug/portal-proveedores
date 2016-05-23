@@ -1,9 +1,14 @@
-
 app.factory("Company", function($http) {
-  var url = "/api/empresa/"
+    var url = "/api/empresa/"
     return {
-        getByProvider: function(idProveedor) {
-            return $http.get(url + 'list/' + idProveedor);
+        getByProvider: function(idProvider, rfc,idRol) {
+            return $http.get(url + 'list/', {
+                params: {
+                    idProvider: idProvider,
+                    rfc: rfc,
+                    idRol:idRol
+                }
+            });
         }
     }
 });

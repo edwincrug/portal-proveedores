@@ -11,6 +11,7 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     $scope.orderDate = "";
     $scope.orderDateValid = "";
     $scope.orderImport = "";
+    $scope.currentUser;
 
     $scope.changeOrderDate = function() {
         if ($scope.orderDate == "") {
@@ -63,15 +64,15 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
 
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId;
-
-        Order.getEnterByProvider($scope.idProvider)
+        $scope.currentUser = data.data;
+        Order.getEnterByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.idRol)
             .then(function(res) {
                 $scope.orderList = res.data;
                 totalElements = $scope.orderList.length;
                 $scope.visible = true;
             })
 
-        Company.getByProvider($scope.idProvider)
+        Company.getByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.idRol)
             .then(function(res) {
                 $scope.companyList = res.data;
                 $scope.company = $scope.companyList[0];
@@ -81,7 +82,7 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {
             $scope.branchSelectVisible = true;
-            Branch.getByCompany(company.emp_idempresa)
+            Branch.getByCompany(company.emp_idempresa, $scope.currentUser.rfc, $scope.currentUser.idRol)
                 .then(function(res) {
                     $scope.branchList = res.data;
                     $scope.branch = $scope.branchList[0];

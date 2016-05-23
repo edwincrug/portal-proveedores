@@ -19,16 +19,16 @@
                         </div>
                         <h3>{{user.razonSocial}}</h3>
                         <h4><strong>RFC:</strong> {{user.rfc}}</h4>
-                        <div class="user-button">
+                        <form method="POST"  id="uploadLogo" class="user-button">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="fileUpload btn btn-sm btn-primary">
                                         <span>Subir logo</span>
-                                        <input type="file" class="upload" />
+                                        <input id="logoFile" type="file" name="file[]" class="upload" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

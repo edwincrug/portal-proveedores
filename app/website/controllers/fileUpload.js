@@ -49,15 +49,61 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     nombre: req.files[i].filename
                 }
             }, function(err, httpResponse, body) {
-
-                    console.log(body)
-              
+                msg.push(body)
+                if (msg.length == 2) {
+                    res.json(JSON.parse(body));
+                }
             });
         }
-        res.json({
-            msg: "ok"
-        })
     }
+}
+
+
+FileUpload.prototype.post_logo = function(req, res, next) {
+    console.log(req.files)
+    res.json({});
+    request.post({
+        url: this.url + "1",
+        form: {
+            dir: "files",
+            folio: req.body.folio[i],
+            proveedor: req.body.provider[i],
+            rfc: req.body.rfc[i],
+            tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
+            nombre: req.files[i].filename
+        }
+    }, function(err, httpResponse, body) {
+        msg.push(body)
+        if (msg.length == 2) {
+            res.json(JSON.parse(body));
+        }
+    });
+        /*if (req.files.length == 2) {
+        if (req.files[0].mimetype != "application/pdf") {
+            var temp = req.files[0];
+            req.files[0] = req.files[1]
+            req.files[1] = temp;
+        }*/
+    /*  var msg = [];
+      for (var i in req.files) {
+          request.post({
+              url: this.url + "1",
+              form: {
+                  dir: "files",
+                  folio: req.body.folio[i],
+                  proveedor: req.body.provider[i],
+                  rfc: req.body.rfc[i],
+                  tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
+                  nombre: req.files[i].filename
+              }
+          }, function(err, httpResponse, body) {
+              msg.push(body)
+              if (msg.length == 2) {
+                  res.json(JSON.parse(body));
+              }
+          });
+      }*/
+    /*}*/
 }
 
 module.exports = FileUpload;

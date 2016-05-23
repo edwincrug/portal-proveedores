@@ -3,7 +3,20 @@ app.controller('userController', function($scope, User, $state, AlertFactory) {
     User.me().then(function(user) {
         $scope.user = user.data
     })
-
+    $('#logoFile').change(function() {
+       var formData = new FormData(document.getElementById("uploadLogo"));
+        $.ajax({
+            url: '/api/fileUpload/logo/',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function(data) {
+                alert(data);
+            }
+        });
+    });
     $scope.updateEmail = function() {
         User.update($scope.user.razonSocial, $scope.user.rfc, $scope.newEmail, 1).then(function(data) {
             console.log(data)

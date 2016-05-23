@@ -10,15 +10,16 @@ var Sucursal = function(conf) {
     }
 }
 
-Sucursal.prototype.get_list_data = function(req, res, next) {
-    if (req.params.data && req.params.data !== "undefined") {
-        request(this.url + "6|" + req.params.data, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
-            }
-        })
+Sucursal.prototype.get_list = function(req, res, next) {
+    if (req.query.idCompany && req.query.rfc && req.query.idRol) {
+        request(this.url + "6|" + rreq.query.idCompany + "|" + req.query.rfc + "|" + req.query.idRol,
+            function(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    res.json(JSON.parse(body));
+                }
+            })
     } else {
-        res.json({});
+        res.json([]);
     }
 }
 

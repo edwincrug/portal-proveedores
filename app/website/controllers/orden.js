@@ -16,38 +16,41 @@ var Orden = function(conf) {
     ]
 }
 
-Orden.prototype.get_pendientes_data = function(req, res, next) {
-    if (req.params.data && req.params.data !== "undefined") {
-        request(this.url + "1|" + req.params.data, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
-            }
-        })
+Orden.prototype.get_pendientes = function(req, res, next) {
+    if (req.query.idProvider && req.query.rfc && req.query.idRol) {
+        request(this.url + "1|" + req.query.idProvider + "|" + req.query.rfc + "|" + req.query.idRol,
+            function(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    res.json(JSON.parse(body));
+                }
+            })
     } else {
-        res.json({});
+        res.json([]);
     }
 }
 
-Orden.prototype.get_ingresadas_data = function(req, res, next) {
-    if (req.params.data && req.params.data !== "undefined") {
-        request(this.url + "2|" + req.params.data, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
-            }
-        })
+Orden.prototype.get_ingresadas = function(req, res, next) {
+    if (req.query.idProvider && req.query.rfc && req.query.idRol) {
+        request(this.url + "2|" + req.query.idProvider + "|" + req.query.rfc + "|" + req.query.idRol,
+            function(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    res.json(JSON.parse(body));
+                }
+            })
     } else {
-        res.json({});
+        res.json([]);
     }
 }
-Orden.prototype.get_pagadas_data = function(req, res, next) {
-    if (req.params.data && req.params.data !== "undefined") {
-        request(this.url + "4|" + req.params.data, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
-            }
-        })
+Orden.prototype.get_pagadas = function(req, res, next) {
+    if (req.query.idProvider && req.query.rfc && req.query.idRol) {
+        request(this.url + "4|" + req.query.idProvider + "|" + req.query.rfc + "|" + req.query.idRol,
+            function(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    res.json(JSON.parse(body));
+                }
+            })
     } else {
-        res.json({});
+        res.json([]);
     }
 }
 Orden.prototype.post_pendientevista = function(req, res, next) {
@@ -63,7 +66,7 @@ Orden.prototype.post_pendientevista = function(req, res, next) {
             }
         })
     } else {
-        res.json({});
+        res.json([]);
     }
 }
 

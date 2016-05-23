@@ -47,6 +47,7 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
                 }
             });
             this.on("successmultiple", function(event, res) {
+              AlertFactory.info(res[0]+res[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;
                 $scope.$apply()
@@ -64,6 +65,9 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
     }
     $('#fileUpdateModal').on('hidden.bs.modal', function(e) {
         $scope.loadingOrder = true;
+        $scope.uploadButton = false;
+        $scope.closeButton = false;
+        dropzone.removeAllFiles();
         $(".filesUpdate").remove();
 
     })

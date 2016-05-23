@@ -9,6 +9,8 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     //Order
     $scope.orderDate = "";
     $scope.orderImport = "";
+    $scope.currentUser;
+
 
     $scope.changeOrderDate = function() {
         if ($scope.orderDate == "") {
@@ -48,18 +50,21 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
         })
     }
 
-
     var totalElements;
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId
-        Order.getPendingByProvider($scope.idProvider)
+        $scope.currentUser = data.data;
+
+
+        Order.getPendingByProvider($scope.idProvider,$scope.currentUser.rfc,$scope.currentUser.idRol)
             .then(function(res) {
+              console.log(res.data)
                 $scope.orderList = res.data;
                 totalElements = $scope.orderList.length;
                 $scope.visible = true;
             })
 
-        Company.getByProvider($scope.idProvider)
+        Company.getByProvider($scope.idProvider,$scope.currentUser.rfc,$scope.currentUser.idRol)
             .then(function(res) {
                 $scope.companyList = res.data;
                 $scope.company = $scope.companyList[0];
@@ -69,7 +74,7 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {
             $scope.branchSelectVisible = true;
-            Branch.getByCompany(company.emp_idempresa)
+            Branch.getByCompany(company.emp_idempresa,$scope.currentUser.rfc,$scope.currentUser.idRol)
                 .then(function(res) {
                     $scope.branchList = res.data;
                     $scope.branch = $scope.branchList[0];

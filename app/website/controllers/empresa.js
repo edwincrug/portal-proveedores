@@ -10,13 +10,15 @@ var Empresa = function(conf) {
     }
 }
 
-Empresa.prototype.get_list_data = function(req, res, next) {
-    if (req.params.data && req.params.data !== "undefined") {
-        request(this.url + "5|" + req.params.data, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.json(JSON.parse(body));
-            }
-        })
+Empresa.prototype.get_list = function(req, res, next) {
+    if (req.query.idProvider && req.query.rfc && req.query.idRol) {
+        request(this.url + "5|" + req.query.idProvider + "|" + req.query.rfc + "|" + req.query.idRol,
+            function(error, response, body) {
+                console.log(body)
+                if (!error && response.statusCode == 200) {
+                    res.json(JSON.parse(body));
+                }
+            })
     } else {
         res.json({});
     }
