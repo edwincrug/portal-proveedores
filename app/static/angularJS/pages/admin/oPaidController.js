@@ -41,14 +41,14 @@ app.controller('oPaidController', function($scope, $stateParams, $filter, Compan
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId
         $scope.currentUser = data.data;
-        Order.getPaidByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.idRol)
+        Order.getPaidByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.ppro_idUserRol)
             .then(function(res) {
                 $scope.orderList = res.data;
                 totalElements = $scope.orderList.length;
                 $scope.visible = true;
             })
 
-        Company.getByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.idRol)
+        Company.getByProvider($scope.idProvider, $scope.currentUser.rfc, $scope.currentUser.ppro_idUserRol)
             .then(function(res) {
                 $scope.companyList = res.data;
                 $scope.company = $scope.companyList[0];
@@ -58,7 +58,7 @@ app.controller('oPaidController', function($scope, $stateParams, $filter, Compan
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {
             $scope.branchSelectVisible = true;
-            Branch.getByCompany(company.emp_idempresa, $scope.currentUser.rfc, $scope.currentUser.idRol)
+            Branch.getByCompany(company.emp_idempresa, $scope.currentUser.rfc, $scope.currentUser.ppro_idUserRol)
                 .then(function(res) {
                     $scope.branchList = res.data;
                     $scope.branch = $scope.branchList[0];
