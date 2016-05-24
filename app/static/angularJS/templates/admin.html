@@ -3,9 +3,10 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                        <img alt="image" class="img-circle" src="/logo/{{user.rfc}}.{{user.urlLogo}}" />
-                         </span>
+                    <div class="dropdown profile-element">
+                        <div class="">
+                            <img alt="image" class="img-circle circle-border m-b-md" src="/logo/{{user.rfc}}.{{user.urlLogo}}" />
+                        </div>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{razonSocial}}</strong>
                          </span> <span class="text-muted text-xs block">{{rfc}} <b class="caret"></b></span> </span>
@@ -80,6 +81,6 @@
             </nav>
         </div>
         <div ui-view></div>
-          </div>
+    </div>
 
 </div>

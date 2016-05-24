@@ -74,3 +74,12 @@
   height: 400px;
   overflow: auto;
 }
+
+.nav-header {
+    background: #2F4043;
+}
+
+.nav-header img {
+    width: 120px;
+    height: 120px;
+}
