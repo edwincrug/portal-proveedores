@@ -4,7 +4,7 @@ app.controller('userController', function($scope, User, $state, AlertFactory) {
         $scope.user = user.data
     })
     $('#logoFile').change(function() {
-       var formData = new FormData(document.getElementById("uploadLogo"));
+        var formData = new FormData(document.getElementById("uploadLogo"));
         $.ajax({
             url: '/api/fileUpload/logo/',
             data: formData,
@@ -13,7 +13,12 @@ app.controller('userController', function($scope, User, $state, AlertFactory) {
             processData: false,
             type: 'POST',
             success: function(data) {
-                alert(data);
+                data = data[0];
+                if (data.estatus == "ok") {
+                    AlertFactory.success(data.mensaje);
+                } else {
+                    AlertFactory.error(data.mensaje);
+                }
             }
         });
     });
