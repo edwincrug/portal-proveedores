@@ -2,7 +2,7 @@ app.controller('adminController', function($scope, $state, User, Alert) {
     User.me().then(function(user) {
         $scope.razonSocial = user.data.razonSocial;
         $scope.rfc = user.data.rfc;
-
+        $scope.user = user.data;
         Alert.getAlerts(user.data.rfc).then(function(alerts) {
             for (var i in alerts.data) {
                 if (alerts.data[i].idTipo == 1) {
