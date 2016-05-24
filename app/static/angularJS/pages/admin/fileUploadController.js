@@ -1,12 +1,17 @@
-app.controller('fileUploadController', function($scope, File, Utils, Order,AlertFactory) {
+app.controller('fileUploadController', function($scope, File, Utils, Order, AlertFactory) {
     $scope.uploadButton = false;
     $scope.closeButton = false;
     $scope.loadingOrder = true;
     $('#fileModal').on('shown.bs.modal', function(e) {
         $("#fileModalLabel").text("Orden " + File.order.folio)
+        console.log(File.order)
         Order.getDocuments(File.order.folio).then(function(d) {
-            var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
-            $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');
+            if (d.data[0].arrayB) {
+                var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
+                $("<object id='pdfDisplay' data='" + pdf + "' width='100%' height='400px' >").appendTo('#pdfContent');
+            } else {
+                $("<h1>No hay orden de compra disponible</h1>").appendTo('#pdfContent');
+            }
             $scope.loadingOrder = false;
         });
 
@@ -42,8 +47,8 @@ app.controller('fileUploadController', function($scope, File, Utils, Order,Alert
                 }
             });
             this.on("successmultiple", function(event, res) {
-              console.log(res)
-                AlertFactory.info(res.msg[0]+res.msg[1]);
+                console.log(res)
+                AlertFactory.info(res.msg[0] + res.msg[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;
                 $scope.$apply()
@@ -64,6 +69,6 @@ app.controller('fileUploadController', function($scope, File, Utils, Order,Alert
         $scope.closeButton = false;
         $scope.loadingOrder = true;
         dropzone.removeAllFiles();
-        $("#pdfDisplay").remove();
+        $("#pdfContent").empty();
     })
 })

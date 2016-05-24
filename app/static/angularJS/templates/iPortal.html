@@ -73,7 +73,8 @@
                                 <tr ng-repeat="order in orderList | company : company
                               | branch:branch | filter : order | offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
                                     <td>
-                                        {{order.oce_folioorden}}
+                                        {{order.oce_folioorden}}<br>
+                                        {{order.per_rfc}}
                                     </td>
                                     <td>
                                         {{order.emp_nombre}}

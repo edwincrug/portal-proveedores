@@ -41,11 +41,16 @@ User.prototype.post_entrar = function(req, res, next) {
 User.prototype.post_salir = function(req, res, next) {
     var self = this;
     auth = new Auth(self.conf);
-    auth.getUser(req, res, next, function(user) {
+    auth.getUser(req, res, next, function(error, user) {
+        if (error) {
+            return res.json({
+                response: "ok"
+            })
+        }
         auth.removeUser(user, function(err, data) {
             if (err) {
-              console.log("err: ")
-              console.log(err)
+                console.log("err: ")
+                console.log(err)
                 res.json({
                     response: "error"
                 })
@@ -56,6 +61,7 @@ User.prototype.post_salir = function(req, res, next) {
             }
 
         })
+
     })
 }
 
@@ -108,7 +114,8 @@ User.prototype.post_editar = function(req, res, next) {
 User.prototype.get_me = function(req, res, next) {
     var self = this;
     auth = new Auth(self.conf);
-    auth.getUser(req, res, next, function(user) {
+    auth.getUser(req, res, next, function(error, user) {
+        if(error) return res.json({});
         delete user.token;
         res.json(user);
     })

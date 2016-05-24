@@ -36,17 +36,18 @@ FileUpload.prototype.post_files = function(req, res, next) {
             req.files[0] = req.files[1]
             req.files[1] = temp;
         }
+        var msg = [];
         for (var i in req.files) {
             request.post({
                 url: this.url + "1",
-                form: {
+                form: JSON.stringify({
                     dir: "files",
                     folio: req.body.folio[i],
                     proveedor: req.body.provider[i],
                     rfc: req.body.rfc[i],
                     tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
                     nombre: req.files[i].filename
-                }
+                })
             }, function(err, httpResponse, body) {
                 msg.push(body)
                 if (msg.length == 2) {
@@ -62,11 +63,11 @@ FileUpload.prototype.post_files = function(req, res, next) {
 FileUpload.prototype.post_logo = function(req, res, next) {
     request.post({
         url: this.url + "2",
-        form: {
+        form: JSON.stringify({
             nombre: req.files[0].filename,
             rfc: req.body.rfc,
             ext: req.files[0].filename.substring(req.files[0].filename.indexOf(".") + 1)
-        }
+        })
     }, function(err, httpResponse, body) {
         res.json(JSON.parse(body));
     });
