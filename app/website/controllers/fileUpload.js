@@ -46,12 +46,13 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     proveedor: req.body.provider[i],
                     rfc: req.body.rfc[i],
                     tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
-                    nombre: req.files[i].filename
+                    nombre: req.files[i].filename,
+                    idRol:req.body.idRol[i]
                 })
             }, function(err, httpResponse, body) {
                 msg.push(body)
                 if (msg.length == 2) {
-                    res.json(JSON.parse(body));
+                    res.json({msg:msg});
                 }
 
             });

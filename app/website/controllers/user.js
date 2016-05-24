@@ -59,9 +59,7 @@ User.prototype.post_salir = function(req, res, next) {
                     response: "ok"
                 })
             }
-
         })
-
     })
 }
 
@@ -110,18 +108,16 @@ User.prototype.post_editar = function(req, res, next) {
     }
 }
 
-
 User.prototype.get_me = function(req, res, next) {
     var self = this;
     auth = new Auth(self.conf);
     auth.getUser(req, res, next, function(error, user) {
+      if(error) return res.status(401).send("No autorizado");
         if(error) return res.json({});
         delete user.token;
         res.json(user);
     })
-
 }
-
 
 User.prototype.post_validar = function(req, res, next) {
     var self = this;
@@ -146,6 +142,7 @@ User.prototype.post_validar = function(req, res, next) {
 
     }
 }
+
 User.prototype.post_activar = function(req, res, next) {
     var self = this;
     if (req.body.token && req.body.rfc && req.body.option) {
@@ -168,8 +165,5 @@ User.prototype.post_activar = function(req, res, next) {
         });
     }
 }
-
-
-
 
 module.exports = User;

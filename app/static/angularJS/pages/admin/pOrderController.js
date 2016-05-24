@@ -54,7 +54,7 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     User.me().then(function(data) {
         $scope.idProvider = data.data.ppro_userId
         $scope.currentUser = data.data;
-      
+
         Order.getPendingByProvider($scope.idProvider,$scope.currentUser.rfc,$scope.currentUser.ppro_idUserRol)
             .then(function(res) {
                 $scope.orderList = res.data;
@@ -105,7 +105,8 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
         File.order = {
             provider: $scope.idProvider,
             rfc: order.per_rfc,
-            folio: order.oce_folioorden
+            folio: order.oce_folioorden,
+            idRol: $scope.currentUser.ppro_idUserRol
         };
     }
 

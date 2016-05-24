@@ -57,6 +57,8 @@ app.controller('fileUploadController', function($scope, File, Utils, Order, Aler
                 formData.append("provider", File.order.provider);
                 formData.append("rfc", File.order.rfc);
                 formData.append("folio", File.order.folio);
+                formData.append("idRol", File.order.idRol);
+
             })
         }
     });
