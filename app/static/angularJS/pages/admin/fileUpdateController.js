@@ -2,6 +2,7 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
 
     $scope.loadingOrder = true;
     $('#fileUpdateModal').on('shown.bs.modal', function(e) {
+        $scope.idEstatus = File.order.idEstatus;
         $("#fileModalUpdateLabel").text("Orden  " + File.order.folio)
         Order.getDocuments(File.order.folio).then(function(d) {
             console.log(d.data[0])

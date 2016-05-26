@@ -49,13 +49,11 @@ User.prototype.post_salir = function(req, res, next) {
         }
         auth.removeUser(user, function(err, data) {
             if (err) {
-                console.log("err: ")
-                console.log(err)
-                res.json({
+                return res.json({
                     response: "error"
                 })
             } else {
-                res.json({
+                return res.json({
                     response: "ok"
                 })
             }

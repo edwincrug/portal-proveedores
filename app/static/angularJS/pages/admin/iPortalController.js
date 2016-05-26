@@ -104,10 +104,12 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     }
 
     $scope.uploadinvoice = function(order) {
+        console.log(order)
         File.order = {
             provider: $scope.idProvider,
             rfc: $scope.currentUser.rfc,
             folio: order.oce_folioorden,
+            idEstatus: order.idEstatus,
             idRol: $scope.currentUser.ppro_idUserRol
         };
     }
