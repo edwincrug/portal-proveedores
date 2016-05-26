@@ -67,7 +67,7 @@
                                     <td>
                                         {{order.oce_folioorden}}<br>
                                         {{order.per_rfc}}<br>
-                                        {{order.nombreProveedor}}
+                                        <span ng-show="currentUser.ppro_idUserRol == 2">{{order.nombreProveedor}}</span>
                                     </td>
                                     <td>
                                         {{order.emp_nombre}}
