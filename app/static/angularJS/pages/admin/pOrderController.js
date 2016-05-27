@@ -105,6 +105,7 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
         File.order = {
             provider: $scope.idProvider,
             rfc: $scope.currentUser.rfc,
+            rfcProvider: order.per_rfc,
             folio: order.oce_folioorden,
             idRol: $scope.currentUser.ppro_idUserRol
         };

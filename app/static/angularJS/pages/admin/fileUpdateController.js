@@ -58,6 +58,8 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
                 formData.append("rfc", File.order.rfc);
                 formData.append("folio", File.order.folio);
                 formData.append("idRol", File.order.idRol);
+                formData.append("rfcProvider", File.order.rfcProvider);
+
             })
         }
     });

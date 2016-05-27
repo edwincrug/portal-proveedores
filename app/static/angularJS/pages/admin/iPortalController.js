@@ -108,6 +108,7 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
         File.order = {
             provider: $scope.idProvider,
             rfc: $scope.currentUser.rfc,
+            rfcProvider: order.per_rfc,
             folio: order.oce_folioorden,
             idEstatus: order.idEstatus,
             idRol: $scope.currentUser.ppro_idUserRol
