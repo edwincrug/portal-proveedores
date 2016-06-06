@@ -30,6 +30,11 @@ var FileUpload = function(conf) {
 }
 
 FileUpload.prototype.post_files = function(req, res, next) {
+    String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
+
     if (req.files.length == 2) {
         if (req.files[0].mimetype != "application/pdf") {
             var temp = req.files[0];
@@ -47,12 +52,16 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     rfc: req.body.rfc[i],
                     tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
                     nombre: req.files[i].filename,
-                    idRol:req.body.idRol[i]
+                    idRol: req.body.idRol[i]
                 })
             }, function(err, httpResponse, body) {
                 msg.push(body)
                 if (msg.length == 2) {
-                    res.json({msg:msg});
+                    msg[0] = msg[0].replaceAll('"', '')
+                    msg[1] = msg[1].replaceAll('"', '')
+                    res.json({
+                        msg: msg
+                    });
                 }
 
             });

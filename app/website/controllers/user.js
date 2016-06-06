@@ -110,11 +110,33 @@ User.prototype.get_me = function(req, res, next) {
     var self = this;
     auth = new Auth(self.conf);
     auth.getUser(req, res, next, function(error, user) {
-      if(error) return res.status(401).send("No autorizado");
-        if(error) return res.json({});
+        if (error) return res.status(401).send("No autorizado");
+        if (error) return res.json({});
         delete user.token;
         res.json(user);
     })
+}
+
+User.prototype.post_reactivate = function(req, res, next) {
+    var self = this;
+    if (req.body.rfc) {
+        request.post({
+                url: this.url + "5",
+                form: JSON.stringify({
+                    rfc: req.body.rfc,
+                })
+            },
+            function(error, response, body) {
+                body = JSON.parse(body);
+                res.json(body);
+            })
+    } else {
+        res.json({
+            estatus: "error",
+            mensaje: "Parametros incorrectos"
+        });
+
+    }
 }
 
 User.prototype.post_validar = function(req, res, next) {

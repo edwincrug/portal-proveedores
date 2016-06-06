@@ -92,10 +92,11 @@ var app = angular.module('app', ['ui.router', 'httpHelper', 'ngCookies'])
                 controller: 'userController'
             }).state('activatePending', {
                 url: '/activacion-pendiente',
-                //admin: true,
+                admin: true,
                 views: {
                     admin: {
                         templateUrl: '/angularJS/templates/activatePending.html',
+                        controller: 'activatePendingController'
                     }
                 }
             }).state('validating', {

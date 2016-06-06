@@ -47,7 +47,7 @@ app.controller('fileUploadController', function($scope, File, Utils, Order, Aler
                 }
             });
             this.on("successmultiple", function(event, res) {
-                console.log(res)
+                
                 AlertFactory.info(res.msg[0] + res.msg[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;

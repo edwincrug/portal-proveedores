@@ -47,7 +47,7 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
                 }
             });
             this.on("successmultiple", function(event, res) {
-              AlertFactory.info(res[0]+res[1]);
+              AlertFactory.info(res[0] + res[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;
                 $scope.$apply()
