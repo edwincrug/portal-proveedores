@@ -52,7 +52,8 @@ FileUpload.prototype.post_files = function(req, res, next) {
                     rfc: req.body.rfc[i],
                     tipo: req.files[i].mimetype.substring(req.files[i].mimetype.indexOf("/") + 1),
                     nombre: req.files[i].filename,
-                    idRol: req.body.idRol[i]
+                    idRol: req.body.idRol[i],
+                    rfcProviderOC: req.body.rfcProvider[i]
                 })
             }, function(err, httpResponse, body) {
                 msg.push(body)

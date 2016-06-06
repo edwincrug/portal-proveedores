@@ -1,7 +1,16 @@
 app.controller('fileUpdateController', function($scope, File, Utils, Order) {
 
     $scope.loadingOrder = true;
+    $('#collapseOneUpdate').on('show.bs.collapse', function() {
+        $("#collapseTwoUpdate").collapse('hide')
+
+    })
+    $('#collapseTwoUpdate').on('show.bs.collapse', function() {
+        $("#collapseOneUpdate").collapse('hide')
+    })
     $('#fileUpdateModal').on('shown.bs.modal', function(e) {
+        $("#collapseOneUpdate").collapse('show')
+        $("#collapseTwoUpdate").collapse('hide')
         $scope.idEstatus = File.order.idEstatus;
         $("#fileModalUpdateLabel").text("Orden  " + File.order.folio)
         Order.getDocuments(File.order.folio).then(function(d) {
@@ -47,7 +56,7 @@ app.controller('fileUpdateController', function($scope, File, Utils, Order) {
                 }
             });
             this.on("successmultiple", function(event, res) {
-              AlertFactory.info(res[0] + res[1]);
+                AlertFactory.info(res[0] + res[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;
                 $scope.$apply()

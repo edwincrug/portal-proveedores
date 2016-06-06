@@ -15,9 +15,7 @@ app.controller('adminController', function($scope, $state, User, Alert) {
 
     })
     $scope.viewAlert = function(rfc, idAlerta) {
-        console.log(idAlerta)
         Alert.viewAlerts(rfc, idAlerta).then(function(data) {
-            console.log(data);
             if (data.data[0].estatus == "ok") {
                 if (idAlerta == 1) {
                     $scope.alertNewOrder.idEstatus = 2;

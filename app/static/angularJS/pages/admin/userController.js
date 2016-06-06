@@ -24,7 +24,6 @@ app.controller('userController', function($scope, User, $state, AlertFactory) {
     });
     $scope.updateEmail = function() {
         User.update($scope.user.razonSocial, $scope.user.rfc, $scope.newEmail, 1).then(function(data) {
-            console.log(data)
             data = data.data[0]
             $scope.newEmail = "";
             if (data.estatus == "ok") {

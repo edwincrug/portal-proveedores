@@ -30,7 +30,6 @@ app.factory("User", function($http, $cookies) {
             return $http.get(url + 'me/');
         },
         reactivate: function(rfc) {
-          console.log(rfc)
             return $http.post(url + 'reactivate/', {
                 rfc: rfc
             });

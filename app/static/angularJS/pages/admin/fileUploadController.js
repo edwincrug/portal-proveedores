@@ -2,9 +2,19 @@ app.controller('fileUploadController', function($scope, File, Utils, Order, Aler
     $scope.uploadButton = false;
     $scope.closeButton = false;
     $scope.loadingOrder = true;
+
+    $('#collapseOne').on('show.bs.collapse', function() {
+        $("#collapseTwo").collapse('hide')
+
+    })
+    $('#collapseTwo').on('show.bs.collapse', function() {
+        $("#collapseOne").collapse('hide')
+    })
+
     $('#fileModal').on('shown.bs.modal', function(e) {
+        $("#collapseOne").collapse('show')
+        $("#collapseTwo").collapse('hide')
         $("#fileModalLabel").text("Orden " + File.order.folio)
-        console.log(File.order)
         Order.getDocuments(File.order.folio).then(function(d) {
             if (d.data[0].arrayB) {
                 var pdf = URL.createObjectURL(Utils.b64toBlob(d.data[0].arrayB, "application/pdf"))
@@ -47,7 +57,7 @@ app.controller('fileUploadController', function($scope, File, Utils, Order, Aler
                 }
             });
             this.on("successmultiple", function(event, res) {
-                
+
                 AlertFactory.info(res.msg[0] + res.msg[1]);
                 $scope.uploadButton = false;
                 $scope.closeButton = true;
