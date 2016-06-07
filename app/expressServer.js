@@ -43,22 +43,29 @@ var ExpressServer = function(config) {
             var data = funcionalidad.split('_')[2];
             data = (method == 'get' && data !== undefined) ? ':data' : '';
             var url = '/api/' + controller + '/' + entorno + '/' + data;
-            this.router(controller, funcionalidad, method, url,middles);
+            this.router(controller, funcionalidad, method, url, middles);
         }
     }
     //Servimos el archivo angular
     this.expressServer.get('*', function(req, res) {
+        console.log("Get")
         res.sendfile('app/static/index.html');
     });
     this.expressServer.post('*', function(req, res) {
-        res.sendfile('app/static/index.html');
+        console.log("Post")
+        console.log(req.body)
+        require('./website/modules/adminLogin')(req, function(error, token) {
+            if (error) return res.redirect("/");
+            res.redirect("/?token=" + JSON.parse(token).token)
+        })
+
     });
 };
 
-ExpressServer.prototype.router = function(controller, funcionalidad, method, url,middles) {
+ExpressServer.prototype.router = function(controller, funcionalidad, method, url, middles) {
     console.log(url);
     var parameters = this.config.parameters;
-    this.expressServer[method](url,middles, function(req, res, next) {
+    this.expressServer[method](url, middles, function(req, res, next) {
         var conf = {
             'funcionalidad': funcionalidad,
             'req': req,
