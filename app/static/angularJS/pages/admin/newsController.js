@@ -4,7 +4,7 @@ app.controller('newsController', function($scope, New, User) {
     $scope.user;
     User.me().then(function(user) {
         $scope.user = user.data;
-        New.getNews(user.data.rfc).then(function(data) {
+        New.getNews($scope.user.ppro_idUserRol==1 ?$scope.user.rfc : $scope.user.ppro_userId).then(function(data) {
             $scope.listNews = data.data;
         })
     })

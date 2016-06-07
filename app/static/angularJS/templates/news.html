@@ -16,7 +16,6 @@
                         <span class="pull-right badge" ng-show="new.idEstatus==1">Nueva</span>
                         <h3>{{new.titulo}}</h3>
                         <small class="text-muted">{{new.fecha| date:'longDate'}}</small>
-
                     </div>
                 </div>
                 <div class="social-body">
@@ -24,7 +23,7 @@
                     <p>
                         {{new.descripcion}}
                     </p>
-                    <button ng-click="newSeen(new.idNoticia,user.rfc)" ui-sref="admin.detail({id:new.idNoticia})" class="btn btn btn-primary btn-block btn-sm">Leer mas</button>
+                    <button ng-click="newSeen(new.idNoticia,user.ppro_idUserRol==1 ? user.rfc : user.ppro_userId)" ui-sref="admin.detail({id:new.idNoticia})" class="btn btn btn-primary btn-block btn-sm">Leer mas</button>
                 </div>
             </div>
         </div>
