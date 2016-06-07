@@ -6,7 +6,8 @@ app.factory("Branch", function($http) {
                 params: {
                     idCompany: idCompany,
                     rfc: rfc,
-                    idRol:idRol
+                    idRol:idRol,
+                    idProvedor:idProvedor
                 }
             });
         }

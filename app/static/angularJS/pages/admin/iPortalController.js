@@ -82,7 +82,8 @@ app.controller('iPortalController', function($scope, $stateParams, $filter, Comp
     $scope.changeCompany = function(company) {
         if (company.emp_idempresa != 0) {
             $scope.branchSelectVisible = true;
-            Branch.getByCompany(company.emp_idempresa, $scope.currentUser.rfc, $scope.currentUser.ppro_idUserRol)
+            Branch.getByCompany(company.emp_idempresa, $scope.currentUser.rfc,
+               $scope.currentUser.ppro_idUserRol,$scope.idProvider)
                 .then(function(res) {
                     $scope.branchList = res.data;
                     $scope.branch = $scope.branchList[0];

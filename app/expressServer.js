@@ -48,12 +48,9 @@ var ExpressServer = function(config) {
     }
     //Servimos el archivo angular
     this.expressServer.get('*', function(req, res) {
-        console.log("Get")
         res.sendfile('app/static/index.html');
     });
     this.expressServer.post('*', function(req, res) {
-        console.log("Post")
-        console.log(req.body)
         require('./website/modules/adminLogin')(req, function(error, token) {
             if (error) return res.redirect("/");
             res.redirect("/?token=" + JSON.parse(token).token)

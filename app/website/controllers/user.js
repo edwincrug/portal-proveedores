@@ -17,6 +17,7 @@ var User = function(conf) {
 User.prototype.post_entrar = function(req, res, next) {
     var self = this;
     if (req.body.rfc && req.body.pass || req.body.idAdmin) {
+      req.body.idAdmin = req.body.idAdmin || "";
         request.get(this.url + "1|" + req.body.rfc + "|" + req.body.pass + "|" + req.body.idAdmin, function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 body = JSON.parse(body);
