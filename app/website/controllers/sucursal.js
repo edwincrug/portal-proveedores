@@ -11,7 +11,6 @@ var Sucursal = function(conf) {
 }
 
 Sucursal.prototype.get_list = function(req, res, next) {
-  console.log(req.query)
     if (req.query.idCompany && req.query.rfc && req.query.idRol && req.query.idProveedor) {
         request(this.url + "6|" + req.query.idCompany + "|" + req.query.rfc
         + "|" + req.query.idRol+ "|" + req.query.idProveedor,

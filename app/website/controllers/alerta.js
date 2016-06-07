@@ -32,7 +32,6 @@ Alerta.prototype.post_vista = function(req, res, next) {
               })
           },
           function(error, response, body) {
-            console.log(body)
               body = JSON.parse(body);
               res.json(body);
           })
