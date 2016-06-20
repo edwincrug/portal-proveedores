@@ -1,5 +1,5 @@
 {
-    "server": "http://192.168.20.9/ProveedorApi/api/",
+    "server": "http://192.168.20.41/ProveedorApi/api/",
     "port": 4100,
     "SQL_user": "sa",
     "SQL_password": "S0p0rt3",

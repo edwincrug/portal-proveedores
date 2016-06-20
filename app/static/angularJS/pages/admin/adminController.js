@@ -3,6 +3,12 @@ app.controller('adminController', function($scope, $state, User, Alert) {
         $scope.razonSocial = user.data.razonSocial;
         $scope.rfc = user.data.rfc;
         $scope.user = user.data;
+        console.log($scope.user.urlLogo)
+        if($scope.user.urlLogo === null){
+          $scope.showImage = false;
+        }else{
+          $scope.showImage = true;
+        }
         Alert.getAlerts(user.data.rfc).then(function(alerts) {
             for (var i in alerts.data) {
                 if (alerts.data[i].idTipo == 1) {

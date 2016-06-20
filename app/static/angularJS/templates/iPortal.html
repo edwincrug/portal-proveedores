@@ -102,7 +102,7 @@
                                         {{order.Estado}}
                                     </td>
                                     <td>
-                                        <button ng-click="uploadinvoice(order)" type="button" class="btn btn-block" data-toggle="modal" data-target="#fileUpdateModal" name="button">Sustituir factura</button>
+                                        <button ng-click="uploadinvoice(order)" type="button" class="btn btn-block" data-toggle="modal" data-target="#fileUpdateModal" name="button">{{order.idEstatus == 2 ? "Consultar factura":"Sustituir factura"}}</button>
                                     </td>
                                 </tr>
                             </tbody>
