@@ -4,7 +4,7 @@ app.controller('adminController', function($scope, $state, User, Alert) {
         $scope.rfc = user.data.rfc;
         $scope.user = user.data;
         console.log($scope.user.urlLogo)
-        if($scope.user.urlLogo === null){
+        if($scope.user.urlLogo == null || $scope.user.urlLogo == "" ){
           $scope.showImage = false;
         }else{
           $scope.showImage = true;
