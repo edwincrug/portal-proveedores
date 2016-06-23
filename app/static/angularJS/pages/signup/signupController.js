@@ -24,6 +24,12 @@ app.controller('signupController', function($scope, User, AlertFactory, $state) 
         confirm_password = document.getElementById("passConfirm");
 
     function validatePassword() {
+        if(password.value.length<6){
+            password.setCustomValidity("La contraseña debe contener al menos 6 caracteres");
+        }
+        if(confirm_password.value.length<6){
+            confirm_password.setCustomValidity("La contraseña debe contener al menos 6 caracteres");
+        }
         if (password.value != confirm_password.value) {
             confirm_password.setCustomValidity("La contraseña no coincide");
         } else {
