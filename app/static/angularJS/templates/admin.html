@@ -5,8 +5,8 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <div class="">
-                            <img ng-show="{{!showImage}}" alt="image" class="img-circle circle-border m-b-md" src="/logo/{{user.rfc}}.{{user.urlLogo}}" />
-                            <img ng-show="{{showImage}}" alt="image" class="img-circle circle-border m-b-md" src="/logo/default.jpg" />
+                            <img ng-show='showImage' alt="image" class="img-circle circle-border m-b-md" src="/logo/{{user.rfc}}.{{user.urlLogo}}"/>
+                            <img ng-show='!showImage' alt="image" class="img-circle circle-border m-b-md" src="/logo/default.jpg" />
                         </div>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{razonSocial}}</strong>
