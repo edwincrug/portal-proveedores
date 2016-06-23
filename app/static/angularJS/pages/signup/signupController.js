@@ -27,7 +27,7 @@ app.controller('signupController', function($scope, User, AlertFactory, $state) 
         if(password.value.length<6){
             password.setCustomValidity("La contraseña debe contener al menos 6 caracteres");
         }else{
-              confirm_password.setCustomValidity('');
+            password.setCustomValidity('');
         }
         if(confirm_password.value.length<6){
             confirm_password.setCustomValidity("La contraseña debe contener al menos 6 caracteres");
