@@ -6,7 +6,8 @@ app.controller('signupController', function($scope, User, AlertFactory, $state) 
 
     $scope.submit = function() {
         User.signup($scope.razon, $scope.email, $scope.rfc.toUpperCase(), $scope.pass)
-            .then(function(data) {
+            .then(function(d) {
+                var data = d.data;
                 data[0].mensaje = decodeURIComponent(data[0].mensaje)
                 if (data[0].estatus == "ok") {
                     AlertFactory.successTopFull(data[0].mensaje)
