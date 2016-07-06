@@ -44,7 +44,8 @@ Auth.prototype.removeUser = function(user,cb) {
 Auth.prototype.getUser = function(req, res, next, cb) {
     passport.authenticate('bearer', function(err, user, info) {
         if (err) {
-            return next(err);
+            console.log("Hubo un error: ", err)
+            return cb(true)
         }
         if (!user) {
             return cb(true)

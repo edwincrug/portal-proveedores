@@ -9,6 +9,8 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
     //Order
     $scope.orderDate = "";
     $scope.orderImport = "";
+    $scope.orderName = "";
+    $scope.orderDetail = "";
     $scope.currentUser;
 
 
@@ -34,19 +36,62 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
         orderArrayList("oce_importetotal", $scope.orderImport, false)
     }
 
-    function orderArrayList(field, order, date) {
+    $scope.changeOrderName = function() {
+        if ($scope.orderName == "") {
+            $scope.orderName = "asc";
+        } else if ($scope.orderName == "asc") {
+            $scope.orderName = "desc";
+        } else if ($scope.orderName == "desc") {
+            $scope.orderName = "asc";
+        }
+        orderArrayList("oce_folioorden", $scope.orderName, false,true)
+    }
+
+    $scope.changeOrderDetail = function() {
+        if ($scope.orderDetail == "") {
+            $scope.orderDetail = "asc";
+        } else if ($scope.orderDetail == "asc") {
+            $scope.orderDetail = "desc";
+        } else if ($scope.orderDetail == "desc") {
+            $scope.orderDetail = "asc";
+        }
+        orderArrayList(["emp_nombre","suc_nombre","dep_nombre"], $scope.orderDetail, false,true)
+    }
+
+
+    function orderArrayList(field, order, date,string) {
 
         $scope.orderList.sort(function(a, b) {
             if (date) {
                 a[field] = new Date(a[field]).getTime();
                 b[field] = new Date(b[field]).getTime();
+            }
+            if(string){
+              var x="",y="";
+              if(Array.isArray(field)){
+                  x = field.reduce(function(ant,sig){
+                      return ant + " "+ a[sig];
+                  },"")
+                  y = field.reduce(function(ant,sig){
+                      return ant + " "+ b[sig];
+                  },"")
+              }else{
+                  x =  a[field]
+                  y =  b[field]
+              }
+              if (order == "asc") {
+                return  x >= y ? -1 : 1
+              } else if (order == "desc") {
+                return  y >= x ? -1 : 1
+              }
+            }else{
+              if (order == "asc") {
+                  return a[field] - b[field]
+              } else if (order == "desc") {
+                  return b[field] - a[field]
+              }
+            }
 
-            }
-            if (order == "asc") {
-                return a[field] - b[field]
-            } else if (order == "desc") {
-                return b[field] - a[field]
-            }
         })
     }
 
@@ -108,7 +153,8 @@ app.controller('pOrderController', function($scope, $stateParams, $filter, User,
             rfc: $scope.currentUser.rfc,
             rfcProvider: order.per_rfc,
             folio: order.oce_folioorden,
-            idRol: $scope.currentUser.ppro_idUserRol
+            idRol: $scope.currentUser.ppro_idUserRol,
+            incomplete: order.incomplete
         };
     }
 

@@ -8,7 +8,6 @@ app.controller('adminController', function($scope, $state, User, Alert) {
         }else{
           $scope.showImage = true;
         }
-        console.log($scope.showImage)
         Alert.getAlerts(user.data.rfc).then(function(alerts) {
             for (var i in alerts.data) {
                 if (alerts.data[i].idTipo == 1) {

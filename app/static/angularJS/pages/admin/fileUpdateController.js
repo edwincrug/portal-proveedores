@@ -1,4 +1,4 @@
-app.controller('fileUpdateController', function($scope, File, Utils, Order) {
+app.controller('fileUpdateController', function($scope, File, Utils, Order,AlertFactory) {
 
     $scope.loadingOrder = true;
     $('#collapseOneUpdate').on('show.bs.collapse', function() {
