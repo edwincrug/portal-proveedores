@@ -35,10 +35,10 @@ app.factory("User", function($http, $cookies) {
             });
         },
         saveToken: function(token) {
-            $cookies.put('andrade-token', token);
+            $cookies.put('andrade-token-provider', token);
         },
         getToken: function() {
-            return $cookies.get('andrade-token')
+            return $cookies.get('andrade-token-provider')
         },
         validate: function(rfc, token, op) {
             return $http.post(url + 'validar/', {

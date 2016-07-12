@@ -25,6 +25,7 @@ app.controller('loginController', function($scope,$location, $state, User, Alert
 
         })
     }
+
     $scope.submit = function() {
         User.login($scope.rfc, $scope.pass).then(function(user) {
             if (user.data.token) {
