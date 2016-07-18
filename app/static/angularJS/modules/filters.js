@@ -28,16 +28,3 @@ app.filter('branch', function() {
         }
     };
 });
-/*
-app.filter('order', function() {
-    return function(input, order) {
-        if(order && order.length>0){
-          return input.filter(function(e) {
-              return e.oce_folioorden.toUpperCase().indexOf(order.toUpperCase())>=0
-          });
-        }else{
-          return input;
-        }
-    };
-});
-*/
